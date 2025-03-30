@@ -1,0 +1,67 @@
+/* ---------- BOTONES REUTILIZABLES ---------- */
+/* botón blanco con texto rojo */
+.btn-login {
+  background-color: var(--blanco) !important;
+  color: var(--rojo) !important;
+  font-weight: 600;
+  border: 2px solid var(--rojo);
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: var(--negro) !important;
+  color: var(--blanco) !important;
+}
+
+.btn-registro {
+  background-color: var(--negro);
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+.btn-registro:hover {
+  background-color: var(--blanco);
+  color: var(--rojo);
+}
+
+/* 🔧 Corregido: CERRAR SESIÓN */
+.btn-cerrar-sesion {
+  background-color: var(--blanco);
+  color: var(--rojo) !important;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid var(--rojo);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: var(--negro);
+  color: var(--rojo) !important;
+  border-color: var(--negro);
+}
+
+
+
+
+.btn-volver-menu {
+  margin-top: 15px;
+  background-color: var(--blanco);
+  color: var(--rojo);
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-volver-menu:hover {
+  background-color: var(--negro);
+  color: var(--blanco);
+}

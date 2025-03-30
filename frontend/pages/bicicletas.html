@@ -1,0 +1,57 @@
+<!-- /pages/bicicletas.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda | BiciMundo</title>
+  
+  <!-- Estilos y fuentes necesarios -->
+  <link rel="stylesheet" href="../css/estilos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header igual al de index.html -->
+  <header>
+    <div class="logo">
+      <h1>BiciMundo</h1>
+      <p>Pedalea con estilo 🚴‍♀️</p>
+    </div>
+    <nav class="menu-principal">
+      <ul class="menu-izquierda">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="bicicletas.html">Tienda</a></li>
+        <li><a href="perfil.html">Mi perfil</a></li>
+        <li><a href="login.html" class="btn-login">Ingresar</a></li>
+        <li><a href="registro.html" class="btn-registro">Registrarse</a></li>
+        <li><a href="carrito.html" id="cerrarSesion" class="btn-cerrar-sesion" style="display: none;">Cerrar sesión</a></li>
+      </ul>
+      <ul class="menu-derecha">
+        <li class="carrito-icono">
+          <a href="carrito.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="contador-carrito">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="tienda-container">
+    <h2>Bicicletas disponibles</h2>
+    <div class="productos-grid" id="contenedor-bicicletas">
+      <!-- Las bicicletas se cargarán dinámicamente aquí -->
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/bicicletas.js"></script>
+</body>
+</html>

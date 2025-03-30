@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito | BiciMundo</title>
+  <link rel="stylesheet" href="../css/estilos.css" />
+  <link rel="stylesheet" href="../css/carrito.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>BiciMundo</h1>
+      <p>Tu carrito de compras 🛒</p>
+    </div>
+    <nav class="menu-principal">
+      <ul class="menu-izquierda">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="bicicletas.html">Tienda</a></li>
+        <li><a href="perfil.html">Mi perfil</a></li>
+        <li><a href="login.html" class="btn-login">Ingresar</a></li>
+        <li><a href="registro.html" class="btn-registro">Registrarse</a></li>
+        <li><a href="#" id="cerrarSesion" class="btn-cerrar-sesion" style="display: none;">Cerrar sesión</a></li>
+      </ul>
+      <ul class="menu-derecha">
+        <li class="carrito-icono">
+          <a href="carrito.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="contador-carrito">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="carrito-container" id="carrito-container">
+    <!-- Este contenedor solo se mostrará si el usuario está logueado y tiene productos en su carrito -->
+    <div id="carrito-content">
+      <h2>Tu carrito</h2>
+      <div id="lista-carrito" class="carrito-lista"></div>
+      <div id="total-carrito" class="carrito-total"></div>
+    </div>
+
+    <!-- Este contenedor se mostrará si el usuario no está logueado -->
+    <div id="acceso-denegado" class="acceso-denegado" style="display: none;">
+      <img src="../img/carrito-bloqueado.png" alt="Acceso denegado">
+      <h3>Debes iniciar sesión o registrarte para acceder a tu carrito</h3>
+      <div class="botones-acceso">
+        <a href="login.html" class="btn-acceso">Iniciar sesión</a>
+        <a href="registro.html" class="btn-acceso">Registrarse</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/carrito.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* ---------- HERO SECTION ---------- */
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 40px;
+    background: linear-gradient(90deg, var(--rojo) 30%, var(--rojo-oscuro) 100%);
+    color: var(--blanco);
+  }
+  
+  .hero-texto {
+    flex: 1 1 50%;
+    max-width: 600px;
+  }
+  
+  .hero-texto h2 {
+    font-size: 3rem; /* Aumentado para mejor visibilidad */
+    margin-bottom: 20px;
+  }
+  
+  .hero-texto p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .btn-principal {
+    background-color: var(--blanco);
+    color: var(--rojo);
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--sombra);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-principal:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+  }
+  
+  .hero-imagen {
+    flex: 1 1 40%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hero-imagen img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  }
+  
+  /* ---------- DESTACADOS (productos) ---------- */
+  .destacados {
+    padding: 60px 40px;
+    text-align: center;
+    background-color: var(--blanco);
+  }
+  
+  .destacados h3 {
+    font-size: 2.5rem; /* Aumentado para mejor visibilidad */
+    margin-bottom: 40px;
+    color: var(--rojo-oscuro);
+  }
+  
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .producto {
+    background-color: var(--gris-claro);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadido box-shadow en el hover */
+    cursor: pointer;
+  }
+  
+  .producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Agregado más énfasis con shadow */
+  }
+  
+  .producto img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .producto h4 {
+    font-size: 1.3rem;
+    color: var(--negro);
+    margin-bottom: 10px;
+  }
+  
+  .producto p {
+    font-size: 1.2rem;
+    color: var(--rojo);
+    font-weight: 600;
+  }
+  
+  /* Botón "Agregar al carrito" */
+  .btn-agregar {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    width: 100%;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-agregar:hover {
+    background-color: var(--rojo-oscuro);
+  }
+  

@@ -1,0 +1,19 @@
+@import url("base.css");
+@import url("layout.css");
+@import url("home.css");
+@import url("registro.css");
+@import url("carrito.css");
+@import url("componentes.css");
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente);
+  background-color: var(--gris-claro);
+  color: var(--negro);
+}

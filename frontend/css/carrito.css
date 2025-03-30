@@ -1,0 +1,55 @@
+/* ---------- CARRITO DE COMPRAS ---------- */
+.carrito-container {
+  padding: 60px 40px;
+  background-color: var(--blanco);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrado del contenido */
+  justify-content: center;
+  text-align: center; /* Centrado del texto */
+}
+
+.acceso-denegado {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrado de los elementos */
+  justify-content: center;
+  gap: 20px; /* Espacio entre la imagen, el mensaje y los botones */
+}
+
+.carrito-bloqueado {
+  width: 250px; /* Reducido tamaño de la imagen */
+  height: auto;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--rojo-oscuro);
+  margin-bottom: 20px;
+}
+
+.botones-acceso {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-acceso {
+  padding: 12px 24px;
+  background-color: var(--rojo);
+  color: var(--blanco);
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: 200px; /* Ancho de los botones */
+  text-align: center; /* Centrado del texto */
+}
+
+.btn-acceso:hover {
+  background-color: var(--negro);
+  color: var(--blanco);
+}

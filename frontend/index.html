@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BiciMundo | Tu tienda de bicicletas</title>
+  <!-- Ruta correcta a los archivos CSS -->
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>BiciMundo</h1>
+      <p>Pedalea con estilo 🚴‍♀️</p>
+    </div>
+    <nav class="menu-principal">
+      <ul class="menu-izquierda">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="pages/bicicletas.html">Tienda</a></li> <!-- Ruta modificada -->
+        <li><a href="pages/perfil.html">Mi perfil</a></li> <!-- Ruta modificada -->
+        <li><a href="pages/login.html" class="btn-login">Ingresar</a></li> <!-- Ruta modificada -->
+        <li><a href="pages/registro.html" class="btn-registro">Registrarse</a></li> <!-- Ruta modificada -->
+        <li><a href="pages/carrito.html" id="cerrarSesion" class="btn-cerrar-sesion" style="display: none;">Cerrar sesión</a></li> <!-- Ruta modificada -->
+      </ul>
+      <ul class="menu-derecha">
+        <li class="carrito-icono">
+          <a href="pages/carrito.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="contador-carrito">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>   
+  </header>
+
+  <section class="hero">
+    <div class="hero-texto">
+      <h2>Descubre la bici perfecta para ti</h2>
+      <p>Modelos de montaña, ruta, urbanas y más... todo en un solo lugar</p>
+      <a href="pages/bicicletas.html" class="btn-principal">Explorar catálogo</a> <!-- Ruta modificada -->
+    </div>
+    <div class="hero-imagen">
+      <img src="img/bicicleta-hero.png" alt="Bicicleta moderna" />
+    </div>
+  </section>
+
+  <section class="destacados">
+    <h3>Bicicletas destacadas</h3>
+    <div class="productos-grid">
+      <div class="producto">
+        <img src="img/bici1.jpg" alt="Bicicleta 1">
+        <h4>Urban Ride X</h4>
+        <p>$750.000</p>
+      </div>
+      <div class="producto">
+        <img src="img/bici2.jpg" alt="Bicicleta 2">
+        <h4>Mountain Pro 500</h4>
+        <p>$1.200.000</p>
+      </div>
+      <div class="producto">
+        <img src="img/bici3.jpg" alt="Bicicleta 3">
+        <h4>Speedster 900</h4>
+        <p>$950.000</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>
