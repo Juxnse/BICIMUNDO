@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 60px 40px;
-    background: linear-gradient(90deg, var(--rojo) 30%, var(--rojo-oscuro) 100%);
+    background: linear-gradient(90deg, var(--negro) 30%, var(--rojo-oscuro) 100%);
     color: var(--blanco);
   }
   
@@ -48,10 +48,17 @@
   }
   
   .hero-imagen img {
-    max-width: 100%;
+    width: 280px;
+    height: auto;
     border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease;
   }
+  
+  .hero-imagen img:hover {
+    transform: scale(1.03);
+  }
+  
   
   /* ---------- DESTACADOS (productos) ---------- */
   .destacados {

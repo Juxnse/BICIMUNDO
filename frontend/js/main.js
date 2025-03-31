@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         localStorage.removeItem('usuarioActual');
         alert('Sesión cerrada correctamente');
-        window.location.href = 'index.html'; // Redirigir al inicio después de cerrar sesión
+        window.location.href = '../index.html'; // Redirigir al inicio después de cerrar sesión
       });
     }
   } else {

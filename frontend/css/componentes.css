@@ -65,3 +65,20 @@
   background-color: var(--negro);
   color: var(--blanco);
 }
+
+#btn-editar {
+  background-color: var(--rojo);
+  color: var(--blanco);
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#btn-editar:hover {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
