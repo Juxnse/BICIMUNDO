@@ -4,42 +4,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const accesoDenegado = document.getElementById('acceso-denegado');
   const carritoContent = document.getElementById('carrito-content');
 
-  // Verificamos si hay un usuario autenticado
   const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
 
-  // SI NO hay sesión, mostramos mensaje de acceso denegado
   if (!usuario) {
-    // Ocultar botones del header (Ingresar y Registrarse)
     const btnLogin = document.querySelector('.btn-login');
     const btnRegistro = document.querySelector('.btn-registro');
 
     if (btnLogin) btnLogin.style.display = 'none';
     if (btnRegistro) btnRegistro.style.display = 'none';
 
-    // Mostrar mensaje de acceso denegado
     accesoDenegado.style.display = 'block';
     carritoContent.style.display = 'none';
-    total.innerHTML = ""; // Ocultar total si no hay carrito
-    return; // Detenemos la ejecución aquí
+    total.innerHTML = "";
+    return;
   }
 
-  // SI HAY sesión, mostramos el contenido del carrito
   const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
   if (carrito.length === 0) {
     contenedor.innerHTML = '<p class="mensaje-vacio">Tu carrito está vacío 🛒</p>';
-    total.innerHTML = ''; // No mostrar total si no hay productos en el carrito
+    total.innerHTML = '';
     return;
   }
 
   let totalCompra = 0;
 
-  // Agregar productos al carrito
   carrito.forEach((item, index) => {
     totalCompra += item.precio;
 
     const card = document.createElement('div');
-    card.classList.add('producto');
+    card.classList.add('carrito-item');
 
     card.innerHTML = `
       <img src="${item.imagen}" alt="${item.nombre}">
@@ -51,19 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
     contenedor.appendChild(card);
   });
 
-  // Mostrar total
   total.innerHTML = `
     <div class="resumen">
       <p>Total: <strong>$${totalCompra.toLocaleString()}</strong></p>
-      <button class="btn-comprar">Finalizar compra</button>
+      <button class="btn-finalizar">Finalizar compra</button>
     </div>
   `;
 });
 
-// Eliminar producto del carrito
 function eliminarDelCarrito(index) {
   let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   carrito.splice(index, 1);
   localStorage.setItem('carrito', JSON.stringify(carrito));
-  location.reload(); // Recargar para actualizar el carrito
+  location.reload();
 }

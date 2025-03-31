@@ -4,19 +4,19 @@ const bicicletas = [
     id: 1,
     nombre: 'Urban Ride X',
     precio: 750000,
-    imagen: '../img/bici1.jpg'
+    imagen: '../img/bicicleta-roja-hibrida.jpg' // ← imagen nueva
   },
   {
     id: 2,
     nombre: 'Mountain Pro 500',
     precio: 1200000,
-    imagen: '../img/bici2.jpg'
+    imagen: '../img/mountain-pro-500.jpg'
   },
   {
     id: 3,
     nombre: 'Speedster 900',
     precio: 950000,
-    imagen: '../img/bici3.jpg'
+    imagen: '../img/speedster-900-pro.jpg'
   }
 ];
 

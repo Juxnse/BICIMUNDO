@@ -1,70 +1,69 @@
 /* ---------- HEADER ---------- */
 header {
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 20px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom: 4px solid var(--rojo-oscuro);
-    box-shadow: 0 4px 10px var(--sombra);
-  }
-  
-  header .logo h1 {
-    font-size: 2.4rem;
-    font-weight: 600;
-  }
-  
-  header .logo p {
-    font-size: 1rem;
-    font-weight: 300;
-    margin-top: 4px;
-  }
-  
-  .menu-principal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 15px;
-  }
-  
-  .menu-izquierda,
-  .menu-derecha {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu-derecha {
-    margin-left: auto;
-  }
-  
-  .menu-izquierda li a,
-  .menu-derecha li a {
-    text-decoration: none;
-    color: var(--blanco);
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: background 0.3s ease;
-  }
-  
-  .menu-izquierda li a:hover,
-  .menu-derecha li a:hover {
-    background-color: var(--blanco);
-    color: var(--rojo);
-  }
-  
-  /* ---------- FOOTER ---------- */
-  footer {
-    background-color: var(--negro);
-    color: var(--blanco);
-    text-align: center;
-    padding: 20px;
-    font-size: 0.95rem;
-    margin-top: 60px;
-  }
-  
+  background-color: var(--rojo);
+  color: var(--blanco);
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 4px solid var(--rojo-oscuro);
+  box-shadow: 0 4px 10px var(--sombra);
+}
+
+header .logo h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+header .logo p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 4px;
+}
+
+.menu-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.menu-izquierda,
+.menu-derecha {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-derecha {
+  margin-left: auto;
+}
+
+.menu-izquierda li a,
+.menu-derecha li a {
+  text-decoration: none;
+  color: var(--blanco);
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.menu-izquierda li a:hover,
+.menu-derecha li a:hover {
+  background-color: var(--blanco);
+  color: var(--rojo);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: var(--negro);
+  color: var(--blanco);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.95rem;
+  margin-top: 60px;
+}
