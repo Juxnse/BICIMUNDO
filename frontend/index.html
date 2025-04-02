@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BiciMundo | Tu tienda de bicicletas</title>
   <!-- Ruta correcta a los archivos CSS -->
+  <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/layout.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -49,23 +51,12 @@
 
   <section class="destacados">
     <h3>Bicicletas destacadas</h3>
-    <div class="productos-grid">
-      <div class="producto">
-        <img src="img/bicicleta-roja-hibrida.jpg" alt="Bicicleta 1">
-        <h4>Urban Ride X</h4>
-        <p>$750.000</p>
+    <main class="tienda-container">
+      <h2>Bicicletas disponibles</h2>
+      <div class="productos-grid" id="contenedor-bicicletas">
+        <!-- Las bicicletas se cargarán dinámicamente aquí -->
       </div>
-      <div class="producto">
-        <img src="img/mountain-pro-500.jpg" alt="Bicicleta 2">
-        <h4>Mountain Pro 500</h4>
-        <p>$1.200.000</p>
-      </div>
-      <div class="producto">
-        <img src="img/speedster-900-pro.jpg" alt="Bicicleta 3">
-        <h4>Speedster 900</h4>
-        <p>$950.000</p>
-      </div>
-    </div>
+    </main>
   </section>
 
   <footer>
@@ -73,6 +64,6 @@
   </footer>
 
   <script src="js/main.js"></script>
-
+  <script src="js/bicicletas.js"></script>
 </body>
 </html>
