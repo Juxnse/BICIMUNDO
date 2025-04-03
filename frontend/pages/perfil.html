@@ -43,6 +43,22 @@
 
     <form id="form-edicion" style="display: none; flex-direction: column; gap: 15px; margin-bottom: 40px;">
       <label>
+        Nombre:
+        <input type="text" id="nombre" required>
+      </label>
+      <label>
+        Email:
+        <input type="email" id="email" required>
+      </label>
+      <label>
+        Nueva contraseña:
+        <input type="password" id="nuevaPassword" placeholder="Nueva contraseña">
+      </label>
+      <label>
+        Confirmar contraseña:
+        <input type="password" id="confirmarPassword" placeholder="Confirma la nueva contraseña">
+      </label>
+      <label>
         Dirección (opcional):
         <input type="text" id="direccion" placeholder="Ej. Calle 123 #45-67">
       </label>
@@ -50,12 +66,11 @@
         Teléfono (opcional):
         <input type="tel" id="telefono" placeholder="Ej. 3001234567">
       </label>
-      <label>
-        Documento (opcional):
-        <input type="text" id="documento" placeholder="Ej. 123456789">
-      </label>
+    
       <button type="submit" class="btn-principal">Guardar cambios</button>
     </form>
+    
+    
 
     <section>
       <h3>Productos en tu carrito</h3>
