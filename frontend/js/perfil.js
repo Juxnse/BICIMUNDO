@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const carritoUsuario = document.getElementById('carrito-usuario');
     const form = document.getElementById('form-edicion');
     const btnEditar = document.getElementById('btn-editar');
-  
+    const imageBasePath = window.location.pathname.includes('/pages/') ? '../img/' : 'img/';
     const inputDireccion = document.getElementById('direccion');
     const inputTelefono = document.getElementById('telefono');
     const inputDocumento = document.getElementById('documento');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = document.createElement('div');
         card.classList.add('producto');
         card.innerHTML = `
-          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <img src="${imageBasePath + producto.imagen}" alt="${producto.nombre}">
           <h4>${producto.nombre}</h4>
           <p>$${producto.precio.toLocaleString()}</p>
         `;
