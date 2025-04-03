@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const accesoDenegado = document.getElementById('acceso-denegado');
   const carritoContent = document.getElementById('carrito-content');
 
+  // Detectar la ruta correcta para las imágenes
+  const imageBasePath = window.location.pathname.includes('/pages/') ? '../img/' : 'img/';
+
   const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
 
   if (!usuario) {
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.classList.add('carrito-item');
 
     card.innerHTML = `
-      <img src="${item.imagen}" alt="${item.nombre}">
+      <img src="${imageBasePath + item.imagen}" alt="${item.nombre}">
       <h4>${item.nombre}</h4>
       <p>$${item.precio.toLocaleString()}</p>
       <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">Eliminar</button>

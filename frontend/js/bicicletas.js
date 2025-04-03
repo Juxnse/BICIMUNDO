@@ -1,29 +1,29 @@
-// Lista de bicicletas fuera de la función DOMContentLoaded
-const basePath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
+// Ruta dinámica para las imágenes según si estás en /pages/ o en la raíz
 const imageBasePath = window.location.pathname.includes('/pages/') ? '../img/' : 'img/';
+const basePath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
 
-
+// Solo nombre de imagen, sin ruta
 const bicicletas = [
   {
     id: 1,
     nombre: 'Urban Ride X',
     descripcion: 'Bicicleta híbrida perfecta para trayectos urbanos y rutas de mediana distancia.',
     precio: 750000,
-    imagen: imageBasePath+'bicicleta-roja-hibrida.jpg'
+    imagen: 'bicicleta-roja-hibrida.jpg'
   },
   {
     id: 2,
     nombre: 'Mountain Pro 500',
     descripcion: 'Ideal para la aventura en montaña, con suspensión reforzada y frenos hidráulicos.',
     precio: 1200000,
-    imagen: imageBasePath+'mountain-pro-500.jpg'
+    imagen: 'mountain-pro-500.jpg'
   },
   {
     id: 3,
     nombre: 'Speedster 900',
     descripcion: 'Diseñada para alta velocidad en carretera, con cuadro ligero y componentes aerodinámicos.',
     precio: 950000,
-    imagen: imageBasePath+'speedster-900-pro.jpg'
+    imagen: 'speedster-900-pro.jpg'
   }
 ];
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.innerHTML = `
         <a href="${basePath}detalles.html?id=${bici.id}" class="producto-link">
-          <img src="${bici.imagen}" alt="${bici.nombre}">
+          <img src="${imageBasePath + bici.imagen}" alt="${bici.nombre}">
           <h4>${bici.nombre}</h4>
           <p>$${bici.precio.toLocaleString()}</p>
         </a>
@@ -46,21 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  
   const imgProducto = document.getElementById('imagen-producto');
   if (imgProducto) {
-    // Obtener el ID del producto desde la URL
     const params = new URLSearchParams(window.location.search);
     const idProducto = parseInt(params.get('id'));
     const biciSeleccionada = bicicletas.find(bici => bici.id === idProducto);
 
     if (biciSeleccionada) {
-      imgProducto.src = biciSeleccionada.imagen;
+      imgProducto.src = imageBasePath + biciSeleccionada.imagen;
       imgProducto.alt = biciSeleccionada.nombre;
       document.getElementById('nombre-producto').textContent = biciSeleccionada.nombre;
       document.getElementById('descripcion-producto').textContent = biciSeleccionada.descripcion;
       document.getElementById('precio-producto').textContent = '$' + biciSeleccionada.precio.toLocaleString();
-      
+
       const btnAgregarCarrito = document.getElementById('btn-agregar-carrito');
       btnAgregarCarrito.addEventListener('click', () => {
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -72,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.agregarAlCarrito = function(id) {
+  window.agregarAlCarrito = function (id) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const bicicleta = bicicletas.find(bici => bici.id === id);
     if (bicicleta) {
@@ -83,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  
   function actualizarContadorCarrito() {
     const contadorCarrito = document.getElementById('contador-carrito');
     if (contadorCarrito) {
