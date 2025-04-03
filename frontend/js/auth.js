@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value;
       const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
       const password = document.getElementById('password').value;
-      const password2 = document.getElementById('password2').value; // Repetir contraseña
+      const password2 = document.getElementById('password2').value;
       const rol = document.getElementById('rol').value;
 
-      // Validación de que las contraseñas coinciden
       if (password !== password2) {
         alert('Las contraseñas no coinciden');
         return;
@@ -21,14 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-      // Validación para ver si ya existe un usuario con el mismo correo
       const existe = usuarios.find(user => user.email === email);
       if (existe) {
         alert('Este correo ya está registrado');
         return;
       }
 
-      // Guardar el nuevo usuario
       usuarios.push({ nombre, cedula, email, fechaNacimiento, password, rol });
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
       alert('Usuario registrado exitosamente 🎉');
@@ -51,8 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (usuario) {
         localStorage.setItem('usuarioActual', JSON.stringify(usuario));
-        alert(Bienvenido, $usuario.nombre);
-        window.location.href = '../index.html';
+        alert(`Bienvenido, ${usuario.nombre} 👋`);
+
+        // Redirección según el rol
+        if (usuario.rol === 'admin') {
+          window.location.href = '../pages/admin.html';
+        } else {
+          window.location.href = '../index.html';
+        }
+
       } else {
         alert('Correo o contraseña incorrectos');
       }

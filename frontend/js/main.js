@@ -4,38 +4,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnRegistro = document.querySelector('.btn-registro');
   const btnCerrarSesion = document.getElementById('cerrarSesion');
 
-  // Ruta actual (sin extensión ni carpeta)
   const enCarrito = window.location.pathname.includes('carrito.html');
 
-  // Si hay usuario logueado
   if (usuario) {
-    if (btnLogin) btnLogin.style.display = 'none'; // Ocultar Ingresar
-    if (btnRegistro) btnRegistro.style.display = 'none'; // Ocultar Registrarse
+    if (btnLogin) btnLogin.style.display = 'none';
+    if (btnRegistro) btnRegistro.style.display = 'none';
 
-    // Mostrar cerrar sesión solo si NO estamos en la página de carrito
     if (enCarrito && btnCerrarSesion) {
-      btnCerrarSesion.style.display = 'none'; // Ocultar cerrar sesión en carrito
+      btnCerrarSesion.style.display = 'none';
     } else if (btnCerrarSesion) {
-      btnCerrarSesion.style.display = 'inline-block'; // Mostrar cerrar sesión en otras páginas
+      btnCerrarSesion.style.display = 'inline-block';
     }
 
-    // Evento para cerrar sesión
     if (btnCerrarSesion) {
       btnCerrarSesion.addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.removeItem('usuarioActual');
-        alert('Sesión cerrada correctamente');
-        window.location.href = '../index.html'; // Redirigir al inicio después de cerrar sesión
+        alert('Sesión cerrada correctamente 👋');
+
+        // Detectar ubicación y redirigir correctamente
+        if (window.location.pathname.includes('/pages/')) {
+          window.location.href = '../index.html';
+        } else {
+          window.location.href = 'index.html';
+        }
       });
     }
   } else {
-    // Si no hay usuario logueado, mostrar botones de "Ingresar" y "Registrarse"
     if (btnLogin) btnLogin.style.display = 'inline-block';
     if (btnRegistro) btnRegistro.style.display = 'inline-block';
-    if (btnCerrarSesion) btnCerrarSesion.style.display = 'none'; // Ocultar "Cerrar sesión"
+    if (btnCerrarSesion) btnCerrarSesion.style.display = 'none';
   }
 
-  // Actualizar el contador del carrito
   const contadorCarrito = document.getElementById('contador-carrito');
   if (contadorCarrito) {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
