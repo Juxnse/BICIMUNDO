@@ -1,73 +1,120 @@
 /* ---------- REGISTRO / LOGIN ---------- */
 .registro-body {
-    background: linear-gradient(to bottom right, var(--rojo), var(--rojo-oscuro));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
+  background: linear-gradient(to bottom right, var(--rojo), var(--rojo-oscuro));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.registro-container {
+  background-color: var(--blanco);
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  text-align: center;
+  min-height: 400px; /* Asegura que el formulario no sea demasiado pequeño */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.registro-container h2 {
+  margin-bottom: 25px;
+  color: var(--rojo-oscuro);
+  font-size: 1.8rem;
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registro-form label {
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.registro-form input,
+.registro-form select {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Ajustes para campos extra (Cédula, Fecha de Nacimiento, Repetir Contraseña) */
+.registro-form input[type="date"] {
+  max-width: 100%;
+}
+
+.registro-form input[type="text"] {
+  max-width: 100%;
+}
+
+.registro-form input[type="password"] {
+  max-width: 100%;
+}
+
+/* Botón de registro */
+.btn-registro-form {
+  background-color: var(--rojo);
+  color: var(--blanco);
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-registro-form:hover {
+  background-color: var(--negro);
+}
+
+.link-login {
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.link-login a {
+  color: var(--rojo-oscuro);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Responsividad para dispositivos pequeños */
+@media screen and (max-width: 480px) {
   .registro-container {
-    background-color: var(--blanco);
-    padding: 40px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    text-align: center;
+      padding: 20px;
+      max-width: 350px; /* Reducir el tamaño del formulario */
+      min-height: 350px; /* Ajustar la altura mínima para pantallas pequeñas */
   }
   
   .registro-container h2 {
-    margin-bottom: 25px;
-    color: var(--rojo-oscuro);
-    font-size: 1.8rem;
+      font-size: 1.5rem; /* Reducir el tamaño del título */
+      margin-bottom: 15px;
   }
-  
-  .registro-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .registro-form label {
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: 500;
-  }
-  
+
   .registro-form input,
   .registro-form select {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
+      padding: 8px;
+      font-size: 0.9rem; /* Reducir el tamaño de los inputs */
   }
-  
+
   .btn-registro-form {
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 12px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
+      padding: 10px;
+      font-size: 0.95rem; /* Reducir el tamaño del botón */
   }
-  
-  .btn-registro-form:hover {
-    background-color: var(--negro);
-  }
-  
+
   .link-login {
-    margin-top: 15px;
-    font-size: 0.95rem;
+      font-size: 0.85rem; /* Reducir el tamaño del texto de login */
   }
-  
-  .link-login a {
-    color: var(--rojo-oscuro);
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
+}
