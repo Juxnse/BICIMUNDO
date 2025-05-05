@@ -1,0 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  usuarioActual: any = null;
+
+  ngOnInit() {
+    const usuarioGuardado = localStorage.getItem('usuarioActual');
+    if (usuarioGuardado) {
+      this.usuarioActual = JSON.parse(usuarioGuardado);
+    }
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem('usuarioActual');
+    window.location.href = '/home';
+  }
+}

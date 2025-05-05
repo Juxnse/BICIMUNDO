@@ -1,0 +1,39 @@
+:root {
+  --rojo: #e00618;
+  --rojo-oscuro: #b71c1c;
+  --negro: #121212;
+  --gris-claro: #f7f7f7;
+  --blanco: #ffffff;
+  --sombra: rgba(0, 0, 0, 0.1);
+  --fuente: 'Poppins', sans-serif;
+}
+
+/* Reseteo de márgenes y rellenos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Asegura que la altura se ocupe completamente */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente);
+  background-color: var(--gris-claro);
+  color: var(--negro);
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}

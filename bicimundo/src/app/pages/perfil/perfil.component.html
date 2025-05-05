@@ -1,0 +1,57 @@
+<header>
+    <div class="logo">
+      <h1>BiciMundo</h1>
+      <p>Tu espacio personal 🚴‍♂️</p>
+    </div>
+  </header>
+  
+  <main class="perfil-container">
+  
+    <h2>Mi perfil</h2>
+  
+    <div *ngIf="usuario">
+      <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+      <p><strong>Email:</strong> {{ usuario.email }}</p>
+      <p><strong>Rol:</strong> {{ usuario.rol }}</p>
+      <p *ngIf="usuario.direccion"><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+      <p *ngIf="usuario.telefono"><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+  
+      <button (click)="toggleEditar()">Editar perfil</button>
+  
+      <form *ngIf="editando" (submit)="guardar(); $event.preventDefault()">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="nombre" name="nombre" required>
+  
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" name="email" required>
+  
+        <label>Nueva contraseña</label>
+        <input type="password" [(ngModel)]="nuevaPassword" name="nuevaPassword">
+  
+        <label>Confirmar contraseña</label>
+        <input type="password" [(ngModel)]="confirmarPassword" name="confirmarPassword">
+  
+        <label>Dirección</label>
+        <input type="text" [(ngModel)]="direccion" name="direccion">
+  
+        <label>Teléfono</label>
+        <input type="text" [(ngModel)]="telefono" name="telefono">
+  
+        <button type="submit">Guardar cambios</button>
+      </form>
+    </div>
+  
+    <h3>Productos en tu carrito</h3>
+    <div *ngIf="carrito.length === 0">
+      <p>No tienes productos en tu carrito.</p>
+    </div>
+    <div *ngFor="let producto of carrito">
+      <p>{{ producto.nombre }} - ${{ producto.precio | number }}</p>
+    </div>
+  
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+  </footer>
+  

@@ -1,0 +1,50 @@
+<header>
+  <div class="logo">
+    <h1>BiciMundo</h1>
+    <p>Tu carrito de compras 🛒</p>
+  </div>
+  <nav class="menu-principal">
+    <ul class="menu-izquierda">
+      <li><a routerLink="/home">Inicio</a></li>
+      <li><a routerLink="/bicicletas">Tienda</a></li>
+      <li><a routerLink="/perfil">Mi perfil</a></li>
+      <li><a routerLink="/login" class="btn-login">Ingresar</a></li>
+      <li><a routerLink="/registro" class="btn-registro">Registrarse</a></li>
+      <li><a routerLink="/carrito" class="btn-cerrar-sesion">Cerrar sesión</a></li>
+    </ul>
+    <ul class="menu-derecha">
+      <li class="carrito-icono">
+        <a routerLink="/carrito">
+          <i class="fas fa-shopping-cart"></i>
+          <span>{{ carrito.length }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="carrito-container">
+  <h2>Tu carrito</h2>
+
+  <div *ngIf="carrito.length === 0">
+    <p class="mensaje-vacio">Tu carrito está vacío 🛒</p>
+  </div>
+
+  <div *ngIf="carrito.length > 0">
+    <div *ngFor="let producto of carrito; let i = index" class="carrito-item">
+      <img [src]="'assets/img/' + producto.imagen" [alt]="producto.nombre" />
+      <h4>{{ producto.nombre }}</h4>
+      <p>${{ producto.precio | number }}</p>
+      <button class="btn-eliminar" (click)="eliminarDelCarrito(i)">Eliminar</button>
+    </div>
+
+    <div class="resumen">
+      <p>Total: <strong>${{ total | number }}</strong></p>
+      <button class="btn-finalizar">Finalizar compra</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+</footer>

@@ -1,0 +1,13 @@
+<div class="registro-container">
+    <h2>Inicia sesión en BiciMundo</h2>
+    <form (submit)="login(); $event.preventDefault()">
+      <label>Correo electrónico</label>
+      <input type="email" [(ngModel)]="email" name="email" required>
+  
+      <label>Contraseña</label>
+      <input type="password" [(ngModel)]="password" name="password" required>
+  
+      <button type="submit">Ingresar</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,31 @@
+<div class="registro-container">
+    <h2>Crear cuenta en BiciMundo</h2>
+    <form (submit)="registrarUsuario(); $event.preventDefault()">
+      <label>Nombre completo</label>
+      <input type="text" [(ngModel)]="nombre" name="nombre" required>
+  
+      <label>Cédula</label>
+      <input type="text" [(ngModel)]="cedula" name="cedula" required>
+  
+      <label>Correo electrónico</label>
+      <input type="email" [(ngModel)]="email" name="email" required>
+  
+      <label>Fecha de nacimiento</label>
+      <input type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" required>
+  
+      <label>Contraseña</label>
+      <input type="password" [(ngModel)]="password" name="password" required>
+  
+      <label>Repite la contraseña</label>
+      <input type="password" [(ngModel)]="password2" name="password2" required>
+  
+      <label>Rol</label>
+      <select [(ngModel)]="rol" name="rol">
+        <option value="cliente">Cliente</option>
+        <option value="admin">Administrador</option>
+      </select>
+  
+      <button type="submit">Registrarme</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,42 @@
+<header>
+  <div class="logo">
+    <h1>BiciMundo</h1>
+    <p>Pedalea con estilo 🚴‍♀️</p>
+  </div>
+  <nav class="menu-principal">
+    <ul class="menu-izquierda">
+      <li><a routerLink="/home">Inicio</a></li>
+      <li><a routerLink="/bicicletas">Tienda</a></li>
+      <li><a routerLink="/perfil">Mi perfil</a></li>
+      <li><a routerLink="/login" class="btn-login">Ingresar</a></li>
+      <li><a routerLink="/registro" class="btn-registro">Registrarse</a></li>
+      <li *ngIf="usuarioActual" ><a routerLink="/carrito" class="btn-cerrar-sesion">Cerrar sesión</a></li>
+    </ul>
+    <ul class="menu-derecha">
+      <li class="carrito-icono">
+        <a routerLink="/carrito">
+          <i class="fas fa-shopping-cart"></i>
+          <span>0</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="producto-detalle" *ngIf="producto">
+    <h2>{{ producto.nombre }}</h2>
+    <img [src]="'assets/img/' + producto.imagen" [alt]="producto.nombre" />
+    <p class="descripcion">{{ producto.descripcion }}</p>
+    <p class="precio">${{ producto.precio | number }}</p>
+    <button (click)="agregarAlCarrito()" class="btn-agregar">Agregar al carrito</button>
+  </section>
+
+  <section *ngIf="!producto">
+    <p>Producto no encontrado 😕</p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+</footer>
