@@ -1,0 +1,76 @@
+.perfil-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .perfil-container h2, .perfil-container h3 {
+    color: #e60023;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e60023;
+    padding-bottom: 0.5rem;
+  }
+  
+  .perfil-container p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+  
+  .perfil-container strong {
+    color: #333;
+  }
+  
+  .perfil-container button {
+    margin-top: 1rem;
+    background-color: #e60023;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .perfil-container button:hover {
+    background-color: #c4001c;
+  }
+  
+  /* Estilos para el formulario de edición */
+  .perfil-container form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .perfil-container input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* Productos en el carrito */
+  .perfil-container .producto-carrito {
+    background-color: #f7f7f7;
+    border-left: 4px solid #e60023;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .perfil-container {
+      padding: 1rem;
+    }
+  
+    .perfil-container button {
+      width: 100%;
+    }
+  }
+  
