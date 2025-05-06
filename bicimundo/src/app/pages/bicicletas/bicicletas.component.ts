@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -54,12 +55,12 @@ export class BicicletasComponent implements OnInit {
 
   agregarAlCarrito(bici: any) {
     this.cartService.agregarAlCarrito(bici);
-    alert(`Bicicleta "${bici.nombre}" agregada al carrito`);
-  }
-
-  cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    window.location.href = '/home';
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      text: `La bicicleta "${bici.nombre}" ha sido agregada al carrito.`,
+      showConfirmButton: false,
+      timer: 1000
+    });
   }
 }
-
