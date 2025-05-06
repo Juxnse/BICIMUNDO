@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service';
+
 
 @Component({
   selector: 'app-bicicletas',
@@ -37,6 +39,12 @@ export class BicicletasComponent implements OnInit {
 
   usuarioActual: any = null;
 
+
+  constructor(
+    private cartService: CartService,
+  ) {}
+
+
   ngOnInit() {
     const usuarioGuardado = localStorage.getItem('usuarioActual');
     if (usuarioGuardado) {
@@ -45,10 +53,8 @@ export class BicicletasComponent implements OnInit {
   }
 
   agregarAlCarrito(bici: any) {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    carrito.push(bici);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    alert(`Bicicleta ${bici.nombre} agregada al carrito`);
+    this.cartService.agregarAlCarrito(bici);
+    alert(`Bicicleta "${bici.nombre}" agregada al carrito`);
   }
 
   cerrarSesion() {
@@ -56,3 +62,4 @@ export class BicicletasComponent implements OnInit {
     window.location.href = '/home';
   }
 }
+
