@@ -2,7 +2,7 @@
 .carrito-container {
   padding: 60px 40px 20px;
   background-color: var(--blanco);
-  flex: 1; /* ✅ Para empujar el footer hacia abajo */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@
 .carrito-item img {
   width: auto;
   max-width: 100%;
-  max-height: 180px; /* ✅ Limita la altura */
+  max-height: 180px; 
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -50,17 +50,19 @@
 
 .btn-eliminar {
   padding: 8px 16px;
-  background-color: var(--rojo-oscuro);
-  color: var(--blanco);
-  border: none;
+  background-color: var(--blanco);
+  color: var(--rojo);
+  border: 2px solid var(--rojo);
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .btn-eliminar:hover {
-  background-color: var(--negro);
+  background-color: var(--rojo);
+  color: var(--blanco);
+  border-color: var(--rojo);
 }
 
 /* ---------- TOTAL Y FINALIZAR ---------- */
@@ -81,7 +83,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  margin-bottom: 40px; /* ✅ Espacio para evitar que tape el footer */
+  margin-bottom: 40px; 
 }
 
 .btn-finalizar {
@@ -139,4 +141,25 @@
 .btn-acceso:hover {
   background-color: var(--negro);
   color: var(--blanco);
+}
+
+
+.carrito-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 40px; 
+}
+
+
+.carrito-item {
+  width: auto;
+  justify-content: center;
+  position: relative;
+}
+
+
+.resumen {
+  grid-column: 1 / -1;
 }
