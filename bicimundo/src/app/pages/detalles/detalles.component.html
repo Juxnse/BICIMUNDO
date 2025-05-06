@@ -1,42 +1,70 @@
-<header>
-  <div class="logo">
-    <h1>BiciMundo</h1>
-    <p>Pedalea con estilo 🚴‍♀️</p>
+<main class="detalles-page">
+  <div class="detalles-grid">
+    <div class="galeria-imagenes">
+      <div class="imagen-principal">
+        <img
+          class="imagen-principal__img"
+          [src]="'assets/img/' + producto.imagen"
+          [alt]="producto.nombre"
+        />
+      </div>
+    </div>
+
+    <aside class="buy-box" *ngIf="producto">
+      <h1 id="nombre-producto">{{ producto.nombre }}</h1>
+      <div class="precio">${{ producto.precio | number }}</div>
+      <div class="descripcion-corta">
+        {{ producto.descripcion }}
+      </div>
+      <div class="opciones">
+        <label for="cantidad">Cantidad</label>
+        <select id="cantidad">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+
+      <button id="btn-agregar-carrito" class="btn-comprar" (click)="agregarAlCarrito(producto)">Agregar al carrito</button>
+
+      <div class="envio">Envío gratis a todo el país</div>
+    </aside>
   </div>
-  <nav class="menu-principal">
-    <ul class="menu-izquierda">
-      <li><a routerLink="/home">Inicio</a></li>
-      <li><a routerLink="/bicicletas">Tienda</a></li>
-      <li><a routerLink="/perfil">Mi perfil</a></li>
-      <li><a routerLink="/login" class="btn-login">Ingresar</a></li>
-      <li><a routerLink="/registro" class="btn-registro">Registrarse</a></li>
-      <li *ngIf="usuarioActual" ><a routerLink="/carrito" class="btn-cerrar-sesion">Cerrar sesión</a></li>
-    </ul>
-    <ul class="menu-derecha">
-      <li class="carrito-icono">
-        <a routerLink="/carrito">
-          <i class="fas fa-shopping-cart"></i>
-          <span>0</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
 
-<main>
-  <section class="producto-detalle" *ngIf="producto">
-    <h2>{{ producto.nombre }}</h2>
-    <img [src]="'assets/img/' + producto.imagen" [alt]="producto.nombre" />
-    <p class="descripcion">{{ producto.descripcion }}</p>
-    <p class="precio">${{ producto.precio | number }}</p>
-    <button (click)="agregarAlCarrito()" class="btn-agregar">Agregar al carrito</button>
-  </section>
-
-  <section *ngIf="!producto">
-    <p>Producto no encontrado 😕</p>
+  <section class="detalle-tabs" *ngIf="producto">
+    <nav>
+      <button
+        class="tab"
+        [class.active]="selectedTab === 'descripcion'"
+        (click)="setTab('descripcion')">
+        Descripción
+      </button>
+      <button
+        class="tab"
+        [class.active]="selectedTab === 'reseñas'"
+        (click)="setTab('reseñas')">
+        Reseñas
+      </button>
+      <button
+        class="tab"
+        [class.active]="selectedTab === 'preguntas'"
+        (click)="setTab('preguntas')">
+        Preguntas
+      </button>
+    </nav>
+    <div class="tab-contents">
+      <div class="tab-content" *ngIf="selectedTab === 'descripcion'">
+        <p>{{ producto.descripcion }}</p>
+      </div>
+      <div class="tab-content" *ngIf="selectedTab === 'reseñas'">
+        <p>Aún no hay reseñas.</p>
+      </div>
+      <div class="tab-content" *ngIf="selectedTab === 'preguntas'">
+        <p>No hay preguntas.</p>
+      </div>
+    </div>
   </section>
 </main>
 
-<footer>
-  <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
-</footer>
+
+
