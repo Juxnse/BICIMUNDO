@@ -1,4 +1,7 @@
 <div class="registro-container">
+    <button class="btn-back" routerLink="/home" aria-label="Regresar">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
     <h2>Inicia sesión en BiciMundo</h2>
     <form (submit)="login(); $event.preventDefault()">
       <label>Correo electrónico</label>
@@ -6,8 +9,12 @@
   
       <label>Contraseña</label>
       <input type="password" [(ngModel)]="password" name="password" required>
-  
+      <p class="registro-link">
+        ¿Aún no estás registrado?
+        <a routerLink="/registro">Click aquí.</a>
+      </p>
       <button type="submit">Ingresar</button>
     </form>
+
   </div>
   
