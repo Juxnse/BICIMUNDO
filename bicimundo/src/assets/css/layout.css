@@ -105,3 +105,7 @@ footer {
   margin-top: 60px;
 }
 
+
+body.swal2-shown {
+  padding-right: 0 !important; 
+}
