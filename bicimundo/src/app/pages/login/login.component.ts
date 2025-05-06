@@ -33,7 +33,7 @@ export class LoginComponent {
       Swal.fire({
         position: 'top',
         icon: 'success',
-        text: `Bienvenido, ${usuario.nombre} 👋`,
+        text: `¡Bienvenido ${usuario.nombre}!`,
         showConfirmButton: false,
         timer: 1000
       }).then(() => {
@@ -44,7 +44,7 @@ export class LoginComponent {
         position: 'top',
         icon: 'error',
         text: 'Correo o contraseña incorrectos.',
-        confirmButtonText: 'Volver a intentar.',
+        confirmButtonText: 'Volver a intentar',
         confirmButtonColor: '#e60023',
       });
     }
