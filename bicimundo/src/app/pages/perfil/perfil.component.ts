@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
@@ -13,7 +14,6 @@ export class PerfilComponent implements OnInit {
 
   usuario: any = null;
   carrito: any[] = [];
-
   nombre: string = '';
   email: string = '';
   direccion: string = '';
@@ -71,3 +71,4 @@ export class PerfilComponent implements OnInit {
     window.location.href = '/home';
   }
 }
+
