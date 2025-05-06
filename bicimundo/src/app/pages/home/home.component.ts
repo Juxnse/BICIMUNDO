@@ -19,9 +19,4 @@ export class HomeComponent implements OnInit {
       this.usuarioActual = JSON.parse(usuarioGuardado);
     }
   }
-
-  cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    window.location.href = '/home';
-  }
 }
