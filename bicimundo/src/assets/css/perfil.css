@@ -1,0 +1,35 @@
+
+
+/* styles.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  app-root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  /* Asegura que el contenido principal crezca */
+  main {
+    flex: 1;
+  }
+  
+  /* Footer siempre abajo */
+  footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  
