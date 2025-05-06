@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,7 +24,10 @@ export class RegistroComponent {
   rol: string = 'cliente';
   carrito: any[] = [];
 
-  constructor(private location: Location) {}
+  constructor(private location: Location,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
 
   goBack(): void {
@@ -31,35 +36,52 @@ export class RegistroComponent {
 
   registrarUsuario() {
     if (this.password !== this.password2) {
-      alert('Las contraseñas no coinciden');
+            Swal.fire({
+              position: 'top',
+              icon: 'error',
+              text: 'Las contraseñas no coinciden.',
+              confirmButtonText: 'Volver a intentar.',
+              confirmButtonColor: '#e60023',
+            });;
       return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const existe = usuarios.find((u: any) => u.email === this.email);
-
-    if (existe) {
-      alert('Este correo ya está registrado');
+    const usuarios: any[] = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    if (usuarios.some(u => u.email === this.email)) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        text: 'Este usuario ya está registrado.',
+        confirmButtonText: 'Cerrar.',
+        confirmButtonColor: '#e60023',
+      });
       return;
     }
 
-    usuarios.push({
-      nombre: this.nombre,
-      cedula: this.cedula,
-      email: this.email,
-      fechaNacimiento: this.fechaNacimiento,
-      password: this.password,
-      rol: this.rol
-    });
+      const nuevoUsuario = {
+        nombre: this.nombre,
+        cedula: this.cedula,
+        email: this.email,
+        fechaNacimiento: this.fechaNacimiento,
+        password: this.password,
+        rol: this.rol      // siempre 'cliente'
+      };
+
+    usuarios.push(nuevoUsuario);
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    alert('Usuario registrado exitosamente 🎉');
 
-    window.location.href = '/login';
-  }
+    this.auth.setUser(nuevoUsuario);
 
-  cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    window.location.href = '/login';
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      text: `Usuario registrado correctamente ¡Bienvenido ${nuevoUsuario.nombre}!`,
+      showConfirmButton: false,
+      timer: 1000
+    }).then(() => {
+      this.router.navigate(['/home']);
+    });
   }
 }
+
