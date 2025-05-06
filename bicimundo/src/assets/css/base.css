@@ -8,14 +8,14 @@
   --fuente: 'Poppins', sans-serif;
 }
 
-/* Reseteo de márgenes y rellenos */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Asegura que la altura se ocupe completamente */
+
 html, body {
   height: 100%;
   display: flex;
@@ -23,6 +23,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 
 html{
   overflow-y: scroll;
@@ -35,9 +42,18 @@ body {
 }
 
 main {
-  flex: 1 0 auto;
+  flex: 1;
 }
 
 footer {
   flex-shrink: 0;
 }
+
+body.swal2-shown {
+  padding-right: 0 !important;
+}
+
+main {
+  min-height: calc(100vh - 200px); 
+}
+
