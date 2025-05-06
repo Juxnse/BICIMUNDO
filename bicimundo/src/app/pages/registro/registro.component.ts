@@ -40,7 +40,7 @@ export class RegistroComponent {
               position: 'top',
               icon: 'error',
               text: 'Las contraseñas no coinciden.',
-              confirmButtonText: 'Volver a intentar.',
+              confirmButtonText: 'Volver a intentar',
               confirmButtonColor: '#e60023',
             });;
       return;
@@ -52,7 +52,7 @@ export class RegistroComponent {
         position: 'top',
         icon: 'error',
         text: 'Este usuario ya está registrado.',
-        confirmButtonText: 'Cerrar.',
+        confirmButtonText: 'Cerrar',
         confirmButtonColor: '#e60023',
       });
       return;
