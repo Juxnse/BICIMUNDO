@@ -10,9 +10,11 @@ header {
   box-shadow: 0 4px 10px var(--sombra);
 }
 
-header .logo h1 {
+header .logo h1 a{
   font-size: 2.4rem;
   font-weight: 600;
+  text-decoration: none;
+  color: var(--blanco);
 }
 
 header .logo p {
@@ -33,14 +35,13 @@ header .logo p {
 .menu-derecha {
   list-style: none;
   display: flex;
+  align-items: center;
+  margin-left: auto;
   gap: 20px;
   padding: 0;
   margin: 0;
 }
 
-.menu-derecha {
-  margin-left: auto;
-}
 
 .menu-izquierda li a,
 .menu-derecha li a {
@@ -57,6 +58,42 @@ header .logo p {
   background-color: var(--blanco);
   color: var(--rojo);
 }
+
+
+
+.menu-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+
+
+  column-gap: 2rem;  
+}
+
+
+.carrito-icono {
+  padding-left: 0.1rem;
+}
+
+
+
+header nav.menu-principal ul.menu-izquierda li a.btn-cerrar-sesion {     
+  padding: 8px 16px;             
+  font-weight: 500;                    
+  background-color: var(--negro) !important;
+  color: var(--blanco) !important;
+  border: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+header nav.menu-principal ul.menu-izquierda li a.btn-cerrar-sesion:hover {
+  background-color: var(--blanco) !important;        
+  color: var(--rojo) !important;                     
+}
+
 
 /* ---------- FOOTER ---------- */
 footer {
