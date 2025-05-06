@@ -1,4 +1,3 @@
-// carrito.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -26,7 +25,7 @@ export class CarritoComponent implements OnInit {
 
     this.cartService.carrito$.subscribe(items => {
       this.carrito = items;
-      this.total = items.reduce((acc, i) => acc + i.precio, 0);
+      this.total = items.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
     });
   }
 
@@ -34,10 +33,4 @@ export class CarritoComponent implements OnInit {
     this.cartService.eliminarDelCarrito(index);
   }
 
-  cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    this.cartService.clear();
-    window.location.href = '/home';
-  }
 }
-
