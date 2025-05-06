@@ -24,6 +24,10 @@ html, body {
   padding: 0;
 }
 
+html{
+  overflow-y: scroll;
+}
+
 body {
   font-family: var(--fuente);
   background-color: var(--gris-claro);
