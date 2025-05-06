@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,13 +11,14 @@ import { CartService } from '../../services/cart.service';
   selector: 'app-detalles',
   standalone: true,
   imports: [CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   templateUrl: './detalles.component.html',
   styleUrls: ['./detalles.component.css']
 })
 export class DetallesComponent implements OnInit {
-
+  cantidad: number = 1;
   producto: any;
   usuarioActual: any = null;
   selectedTab: 'descripcion' | 'reseñas' | 'preguntas' = 'descripcion';
@@ -61,13 +64,15 @@ export class DetallesComponent implements OnInit {
   }
 
   agregarAlCarrito(bici: any) {
-    this.cartService.agregarAlCarrito(bici);
-    alert(`Bicicleta "${bici.nombre}" agregada al carrito`);
+    this.cartService.agregarAlCarrito(bici, this.cantidad);
+       Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: `Agregaste ${this.cantidad} x ${bici.nombre} al carrito.`,
+          showConfirmButton: false,
+          timer: 1000
+        });
   }
 
-  cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    window.location.href = '/home';
-  }
-  
 }
+
