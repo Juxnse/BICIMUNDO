@@ -15,7 +15,7 @@
   }
   
   .hero-texto h2 {
-    font-size: 3rem; /* Aumentado para mejor visibilidad */
+    font-size: 3rem; 
     margin-bottom: 20px;
   }
   
@@ -60,7 +60,6 @@
   }
   
   
-  /* ---------- DESTACADOS (productos) ---------- */
   .destacados {
     padding: 60px 40px;
     text-align: center;
@@ -68,7 +67,7 @@
   }
   
   .destacados h3 {
-    font-size: 2.5rem; /* Aumentado para mejor visibilidad */
+    font-size: 2.5rem; 
     margin-bottom: 40px;
     color: var(--rojo-oscuro);
   }
@@ -79,6 +78,8 @@
     gap: 30px;
     max-width: 1100px;
     margin: 0 auto;
+    justify-content: start;
+    cursor: pointer;
   }
   
   .producto {
@@ -86,13 +87,13 @@
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadido box-shadow en el hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
     cursor: pointer;
   }
   
   .producto:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Agregado más énfasis con shadow */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
   }
   
   .producto img {
@@ -113,7 +114,7 @@
     font-weight: 600;
   }
   
-  /* Botón "Agregar al carrito" */
+
   .btn-agregar {
     background-color: var(--rojo);
     color: var(--blanco);
@@ -124,6 +125,7 @@
     width: 100%;
     border: none;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
   
   .btn-agregar:hover {
