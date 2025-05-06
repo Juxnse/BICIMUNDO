@@ -21,3 +21,7 @@ body {
 a {
   text-decoration: none;
 }
+
+body.swal2-shown {
+  padding-right: 0 !important; 
+}
