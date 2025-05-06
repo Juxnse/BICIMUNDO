@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service';
+
+
 
 @Component({
   selector: 'app-detalles',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,
+    RouterModule
+  ],
   templateUrl: './detalles.component.html',
   styleUrls: ['./detalles.component.css']
 })
@@ -13,6 +18,7 @@ export class DetallesComponent implements OnInit {
 
   producto: any;
   usuarioActual: any = null;
+  selectedTab: 'descripcion' | 'reseñas' | 'preguntas' = 'descripcion';
 
   bicicletas = [
     {
@@ -38,22 +44,25 @@ export class DetallesComponent implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute) {}
+
+
+  constructor(private route: ActivatedRoute,
+    private cartService: CartService,
+  ) {}
 
   ngOnInit() {
-    // Obtener usuario actual
     this.usuarioActual = JSON.parse(localStorage.getItem('usuarioActual') || 'null');
-
-    // Obtener ID del producto desde la ruta
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.producto = this.bicicletas.find(bici => bici.id === id);
   }
 
-  agregarAlCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    carrito.push(this.producto);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    alert(`Bicicleta ${this.producto.nombre} agregada al carrito`);
+  setTab(tab: 'descripcion'|'reseñas'|'preguntas') {
+    this.selectedTab = tab;
+  }
+
+  agregarAlCarrito(bici: any) {
+    this.cartService.agregarAlCarrito(bici);
+    alert(`Bicicleta "${bici.nombre}" agregada al carrito`);
   }
 
   cerrarSesion() {
@@ -61,5 +70,4 @@ export class DetallesComponent implements OnInit {
     window.location.href = '/home';
   }
   
-
 }
