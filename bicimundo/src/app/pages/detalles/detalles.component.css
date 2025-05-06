@@ -1,0 +1,166 @@
+
+.detalles-page {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .detalles-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+  
+  /* GALERÍA DE IMÁGENES */
+  .galeria-imagenes {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .imagen-principal {
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .imagen-principal img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .miniaturas {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .miniaturas .thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+
+  .buy-box {
+    position: sticky;
+    top: 100px;
+    background: #fff;
+    padding: 2rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .buy-box h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #333;
+  }
+  
+  .buy-box .precio {
+    font-size: 2rem;
+    color: #e60023;
+    font-weight: bold;
+  }
+  .descripcion-corta {
+    background-color: #f8f8f8;
+    border-left: 4px solid #e60023;
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .buy-box .opciones {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .buy-box .opciones label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .buy-box select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn-comprar {
+    background: #e60023;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-comprar:hover {
+    background: #cc001f;
+  }
+  
+  .buy-box .envio {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+
+.detalle-tabs {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2rem 0;       /* espacio arriba y abajo */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+
+  .detalle-tabs nav {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #e1e1e1;
+    background: #fafafa;
+  }
+  
+
+  .detalle-tabs .tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .detalle-tabs .tab.active {
+    color: #000;
+    border-color: #e60023;
+  }
+  
+
+  .detalle-tabs .tab-contents {
+    padding: 1.5rem 2rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+
+  .detalle-tabs .tab-content p {
+    margin: 0;
+  }
+  
