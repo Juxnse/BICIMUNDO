@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registro',
@@ -20,6 +21,13 @@ export class RegistroComponent {
   password2: string = '';
   rol: string = 'cliente';
   carrito: any[] = [];
+
+  constructor(private location: Location) {}
+
+
+  goBack(): void {
+    this.location.back();
+  }
 
   registrarUsuario() {
     if (this.password !== this.password2) {
