@@ -27,7 +27,7 @@ export class PerfilComponent implements OnInit {
 
 
   constructor(
-    private auth: AuthService,  // ← inyecta AuthService
+    private auth: AuthService, 
     private router: Router
   ) {}
 
@@ -59,6 +59,7 @@ export class PerfilComponent implements OnInit {
         icon: 'error',
         text: 'Las contraseñas no coinciden.',
         showConfirmButton: true,
+        confirmButtonText: 'Volver a intentar',
         confirmButtonColor: '#e60023',
       });
       return;
@@ -81,7 +82,7 @@ export class PerfilComponent implements OnInit {
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
     }
 
-    // 2) Actualiza AuthService y localStorage simultáneamente
+
     this.auth.setUser(this.usuario);
 
     Swal.fire({
