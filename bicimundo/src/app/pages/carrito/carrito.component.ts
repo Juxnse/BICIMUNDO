@@ -1,41 +1,43 @@
+// carrito.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-
-  carrito: any[] = [];
+  carrito: any[] = [];  
   total: number = 0;
   usuarioActual: any = null;
+
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
     const usuarioGuardado = localStorage.getItem('usuarioActual');
     if (usuarioGuardado) {
       this.usuarioActual = JSON.parse(usuarioGuardado);
     }
-    this.cargarCarrito();
-  }
 
-  cargarCarrito() {
-    const carritoGuardado = JSON.parse(localStorage.getItem('carrito') || '[]');
-    this.carrito = carritoGuardado;
-    this.total = this.carrito.reduce((acc, item) => acc + item.precio, 0);
+    this.cartService.carrito$.subscribe(items => {
+      this.carrito = items;
+      this.total = items.reduce((acc, i) => acc + i.precio, 0);
+    });
   }
 
   eliminarDelCarrito(index: number) {
-    this.carrito.splice(index, 1);
-    localStorage.setItem('carrito', JSON.stringify(this.carrito));
-    this.cargarCarrito();
+    this.cartService.eliminarDelCarrito(index);
   }
 
   cerrarSesion() {
     localStorage.removeItem('usuarioActual');
+    this.cartService.clear();
     window.location.href = '/home';
   }
 }
+
