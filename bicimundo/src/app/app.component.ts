@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators';
 import { CartService } from './services/cart.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Component({
   
@@ -30,18 +31,19 @@ export class AppComponent {
   
   constructor(private router: Router,
     private cartService: CartService,
+    private auth: AuthService
   ) {}
 
 
   ngOnInit() {
 
     this.cartCount$ = this.cartService.carrito$.pipe(
-      map(items => items.length)
+      map(items => items.reduce((acc, i) => acc + (i.cantidad || 1), 0))
     );
-    const usuarioGuardado = localStorage.getItem('usuarioActual');
-    if (usuarioGuardado) {
-      this.usuarioActual = JSON.parse(usuarioGuardado);
-    }
+
+    this.auth.user$.subscribe((user: any) => {
+      this.usuarioActual = user;
+    });
 
     this.router.events
       .pipe(filter(evt => evt instanceof NavigationEnd))
@@ -55,10 +57,10 @@ export class AppComponent {
   }
 
   cerrarSesion() {
-    localStorage.removeItem('usuarioActual');
-    this.cartService.clear();
+    this.auth.clearUser();
     window.location.href = '/home';
     
   }
 
 }
+
