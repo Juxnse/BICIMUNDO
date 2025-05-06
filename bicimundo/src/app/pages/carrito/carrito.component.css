@@ -1,0 +1,22 @@
+.carrito-item p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: var(--black)
+  }
+  
+  .carrito-item p strong {
+    color: var(--black);
+  }
+
+  .carrito-item {
+    position: relative;
+    padding: 20px;
+    padding-bottom: 80px;
+  }
+  
+  .carrito-item .btn-eliminar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
