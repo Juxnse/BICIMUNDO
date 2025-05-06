@@ -18,11 +18,13 @@
       </div>
       <div class="opciones">
         <label for="cantidad">Cantidad</label>
-        <select id="cantidad">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
+          <input
+            id="cantidad"
+            type="number"
+            min="1"
+            [(ngModel)]="cantidad"
+            class="cantidad-input"
+          />
       </div>
 
       <button id="btn-agregar-carrito" class="btn-comprar" (click)="agregarAlCarrito(producto)">Agregar al carrito</button>
@@ -65,6 +67,8 @@
     </div>
   </section>
 </main>
+
+
 
 
 
