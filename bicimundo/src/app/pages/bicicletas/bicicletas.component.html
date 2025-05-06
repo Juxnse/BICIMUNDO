@@ -1,7 +1,6 @@
-
-
 <main class="tienda-container">
   <h2>Bicicletas disponibles</h2>
+  <span>­</span> 
   <div class="productos-grid">
     <div *ngFor="let bici of bicicletas" class="producto">
       <a [routerLink]="['/detalles', bici.id]" class="producto-link">
