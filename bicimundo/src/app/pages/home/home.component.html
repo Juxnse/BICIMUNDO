@@ -13,7 +13,33 @@
   <section class="destacados">
     <h3>Bicicletas destacadas</h3>
     <div class="productos-grid">
-      <p>Aquí se cargarán dinámicamente las bicicletas.</p>
+      <!-- Si no hay ninguna, aviso -->
+      <ng-container *ngIf="(bicicletasDestacadas$ | async)?.length === 0">
+        <p>No hay bicicletas destacadas por el momento.</p>
+      </ng-container>
+
+      <!-- Recorremos solo las destacadas -->
+      <div 
+        *ngFor="let bici of (bicicletasDestacadas$ | async)" 
+        class="producto"
+      >
+        <a [routerLink]="['/detalles', bici.id]" class="producto-link">
+          <img 
+            [src]="bici.imagen" 
+            [alt]="bici.nombre" 
+            class="producto-img" 
+          />
+          <h4>{{ bici.nombre }}</h4>
+          <p>${{ bici.precio | number }}</p>
+        </a>
+        <button 
+          class="btn-agregar" 
+          (click)="agregarAlCarrito(bici)"
+          title="Para comprar, ve a la tienda"
+        >
+          Agregar al carrito
+        </button>
+      </div>
     </div>
   </section>
 </main>
