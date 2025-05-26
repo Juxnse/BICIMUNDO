@@ -17,12 +17,12 @@ html, body {
     flex: 1;
   }
   
-
+  /* Asegura que el contenido principal crezca */
   main {
     flex: 1;
   }
   
-
+  /* Footer siempre abajo */
   footer {
     background-color: #111;
     color: white;
