@@ -1,0 +1,58 @@
+<h2>Panel de administración</h2>
+<table class="admin-table">
+  <colgroup>
+    <col style="width: 5%;" />    <!-- ID -->
+    <col style="width: 15%;" />
+    <col style="width: 40%;" />    <!-- Nombre -->
+    <col style="width: 10%;" />   <!-- Precio -->
+    <col style="width: 10%;" />   <!-- Stock -->
+    <col style="width: 10%;" />   <!-- Destacada -->
+      <!-- Descripción (textarea) -->
+    <col style="width: 10%;" />   <!-- Acciones -->
+  </colgroup>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Destacada</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of bicis">
+      <td>{{ b.id }}</td>
+      <td><input type="text" [(ngModel)]="b.nombre" /></td>
+      <td>
+        <textarea
+          class="desc-textarea"
+          [(ngModel)]="b.descripcion"
+          rows="3"
+        ></textarea>
+      </td>
+      <td><input type="number" [(ngModel)]="b.precio" /></td>
+      <td><input type="number" [(ngModel)]="b.stock" /></td>
+      <td>
+        <div class="destacada">
+          <input type="checkbox" [(ngModel)]="b.destacada" />
+        </div>
+      </td>
+
+      <td>
+        <div class="action-buttons">
+          <button type="button" class="btn" (click)="save(b)">
+            Guardar
+          </button>
+          <button type="button" class="btn" (click)="del(b.id)">
+            Eliminar
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<a routerLink="/admin/create" class="btn-crear">
+  Crear nueva bicicleta
+</a>

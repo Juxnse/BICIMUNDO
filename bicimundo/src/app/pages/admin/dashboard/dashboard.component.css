@@ -1,0 +1,92 @@
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+.admin-table input[type="text"],
+.admin-table input[type="number"]{
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  
+  
+}
+.btn-crear {
+  display: inline-block;
+  margin-top: 1rem;
+  background: #e60023;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.btn-crear:hover {
+  background-color: #ac041d;
+  color: var(--blanco);
+  border-color: var(--rojo);
+}
+
+.btn {
+  padding: 8px 16px;
+  background-color: var(--blanco);
+  color: var(--rojo);
+  border: 2px solid var(--rojo);
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--rojo);
+  color: var(--blanco);
+  border-color: var(--rojo);
+}
+
+
+.admin-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  
+}
+
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;       
+}
+
+.action-buttons .btn {
+  flex: 1;         
+  text-align: center;
+}
+
+.admin-table input[type="checkbox"]{
+
+  width: 20px;
+  box-sizing: border-box;
+  height: 20px;
+  border-radius: 8px;
+
+}
+
+.destacada {
+    display: flex;
+  justify-content: center ;
+  
+}
+
+.desc-textarea {
+  width: 100%;
+  max-height: 40px;
+  resize: vertical;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-family: inherit;
+  border-radius: 4px;
+}
