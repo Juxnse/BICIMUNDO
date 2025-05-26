@@ -1,47 +1,48 @@
 <div class="layout">
-    <header *ngIf="shouldShowLayout()">
-        <div class="logo">
-          <h1><a href="/home">BiciMundo</a></h1>
-          <p>Pedalea con estilo 🚴‍♀️</p>
-        </div>
-        <nav class="menu-principal">
-          <ul class="menu-izquierda">
-            <li><a routerLink="/home">Inicio</a></li>
-            <li><a routerLink="/bicicletas">Tienda</a></li>
-            <li *ngIf="usuarioActual">
-              <a routerLink="/perfil">Mi perfil</a>
-            </li>
-            <li *ngIf="!usuarioActual">
-              <a routerLink="/login" class="btn-login">Ingresar</a>
-            </li>
-            <li *ngIf="!usuarioActual">
-              <a routerLink="/registro" class="btn-registro">Registrarse</a>
-            </li>
-            <li *ngIf="usuarioActual">
-              <a routerLink="/home" (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar sesión</a>
-            </li>
-          </ul>
-      
-          <ul class="menu-derecha">
-            <li class="carrito-icono">
-              <a routerLink="/carrito">
-                <i class="fas fa-shopping-cart"></i>
-                <span>ㅤ{{ usuarioActual ? (cartCount$ | async) : 0 }}</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-  
-    <main class="content">
-      <router-outlet></router-outlet>
-    </main>
-  
-  
-    <footer *ngIf="shouldShowLayout()">
-        <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
-      </footer>
-      
-  </div>
+  <header *ngIf="shouldShowLayout()">
+    <div class="logo">
+      <h1><a routerLink="/home">BiciMundo</a></h1>
+      <p>Pedalea con estilo 🚴‍♀️</p>
+    </div>
+
+    <nav class="menu-principal" *ngIf="usuarioActual?.rol !== 'admin'">
+      <ul class="menu-izquierda">
+        <li><a routerLink="/home">Inicio</a></li>
+        <li><a routerLink="/bicicletas">Tienda</a></li>
+        <li *ngIf="usuarioActual"><a routerLink="/perfil">Mi perfil</a></li>
+        <li *ngIf="!usuarioActual"><a routerLink="/login" class="btn-login">Ingresar</a></li>
+        <li *ngIf="!usuarioActual"><a routerLink="/registro" class="btn-registro">Registrarse</a></li>
+        <li *ngIf="usuarioActual">
+          <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar sesión</button>
+        </li>
+      </ul>
+      <ul class="menu-derecha">
+        <li class="carrito-icono">
+          <a routerLink="/carrito">
+            <i class="fas fa-shopping-cart"></i>
+            <span>{{ cartCount$ | async }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+
+    <nav class="menu-principal" *ngIf="usuarioActual?.rol === 'admin'">
+      <ul class="menu-izquierda">
+        <li>
+          <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar sesión</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer *ngIf="shouldShowLayout()">
+    <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
+  </footer>
+</div>
   
   
