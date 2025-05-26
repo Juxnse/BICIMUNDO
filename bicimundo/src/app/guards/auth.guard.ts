@@ -5,9 +5,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   const usuario = localStorage.getItem('usuarioActual');
 
   if (usuario) {
-    return true; // ✅ Está logueado → permitir acceso
+    return true;
   } else {
-    window.location.href = '/login'; // 🚫 No está logueado → redirigir a login
+    window.location.href = '/login'; 
     return false;
   }
 };
