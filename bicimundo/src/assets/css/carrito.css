@@ -1,4 +1,5 @@
 
+/* ---------- CARRITO DE COMPRAS ---------- */
 .carrito-container {
   padding: 60px 40px 20px;
   background-color: var(--blanco);
@@ -65,7 +66,7 @@
   border-color: var(--rojo);
 }
 
-
+/* ---------- TOTAL Y FINALIZAR ---------- */
 .carrito-total {
   font-size: 1.3rem;
   font-weight: bold;
@@ -83,7 +84,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  margin-bottom: 40px; 
+  margin-bottom: 40px; /* ✅ Espacio para evitar que tape el footer */
 }
 
 .btn-finalizar {
@@ -104,7 +105,7 @@
   background-color: var(--negro);
 }
 
-
+/* ---------- ACCESO DENEGADO ---------- */
 .acceso-denegado {
   display: flex;
   flex-direction: column;
