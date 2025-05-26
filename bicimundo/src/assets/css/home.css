@@ -15,7 +15,7 @@
   }
   
   .hero-texto h2 {
-    font-size: 3rem; 
+    font-size: 3rem; /* Aumentado para mejor visibilidad */
     margin-bottom: 20px;
   }
   
@@ -44,7 +44,7 @@
   .hero-imagen {
     flex: 1 1 40%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
   }
   
   .hero-imagen img {
@@ -53,6 +53,7 @@
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     transition: transform 0.4s ease;
+    
   }
   
   .hero-imagen img:hover {
@@ -60,6 +61,7 @@
   }
   
   
+  /* ---------- DESTACADOS (productos) ---------- */
   .destacados {
     padding: 60px 40px;
     text-align: center;
@@ -67,54 +69,68 @@
   }
   
   .destacados h3 {
-    font-size: 2.5rem; 
+    font-size: 2.5rem; /* Aumentado para mejor visibilidad */
     margin-bottom: 40px;
     color: var(--rojo-oscuro);
   }
   
   .productos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
-    justify-content: start;
     cursor: pointer;
   }
+
   
   .producto {
     background-color: var(--gris-claro);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px; /* altura fija */
   }
+
   
   .producto:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Agregado más énfasis con shadow */
   }
   
   .producto img {
     width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-  }  
-  
-  .producto h4 {
-    font-size: 1.3rem;
-    color: var(--negro);
+    height: 200px;
+    object-fit: contain; /* muestra todo el contenido sin recortarlo ni deformarlo */
     margin-bottom: 10px;
   }
+
   
+  .producto h4 {
+    display: flex;
+    font-size: 1.3rem;
+    color: var(--negro);
+    margin-bottom: 5px;
+    min-height: 48px; 
+    justify-content: flex-start;
+  }
+
   .producto p {
+    display: flex;
     font-size: 1.2rem;
     color: var(--rojo);
     font-weight: 600;
+    margin-bottom: 10px;
+    justify-content: flex-start;
   }
-  
 
+  
+  /* Botón "Agregar al carrito" */
   .btn-agregar {
     background-color: var(--rojo);
     color: var(--blanco);
