@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-carrito',
@@ -15,7 +16,9 @@ export class CarritoComponent implements OnInit {
   total: number = 0;
   usuarioActual: any = null;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,
+    private ps: ProductService,
+  ) {}
 
   ngOnInit() {
     const usuarioGuardado = localStorage.getItem('usuarioActual');
@@ -31,6 +34,7 @@ export class CarritoComponent implements OnInit {
 
   eliminarDelCarrito(index: number) {
     this.cartService.eliminarDelCarrito(index);
+
   }
 
 }
