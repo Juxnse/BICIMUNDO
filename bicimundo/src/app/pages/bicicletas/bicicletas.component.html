@@ -4,7 +4,8 @@
   <div class="productos-grid">
     <div *ngFor="let bici of bicicletas" class="producto">
       <a [routerLink]="['/detalles', bici.id]" class="producto-link">
-        <img [src]="'assets/img/' + bici.imagen" [alt]="bici.nombre" />
+        <img [src]="bici.imagen" [alt]="bici.nombre" class="producto-img" />
+
         <h4>{{ bici.nombre }}</h4>
         <p>${{ bici.precio | number }}</p>
       </a>
@@ -12,4 +13,6 @@
     </div>
   </div>
 </main>
+
+
 
