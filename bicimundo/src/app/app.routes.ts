@@ -7,7 +7,9 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { authGuard } from './guards/auth.guard';
-
+import { AdminDashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { AdminCreateComponent } from './pages/admin/create/create.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,4 +20,13 @@ export const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
+  {
+    path: 'admin',
+    canActivate:     [adminGuard],
+    canActivateChild: [adminGuard], 
+    children: [
+      { path: '',       component: AdminDashboardComponent },
+      { path: 'create', component: AdminCreateComponent }
+    ]
+  },
 ];
