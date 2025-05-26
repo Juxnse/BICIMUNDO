@@ -1,76 +1,116 @@
-.perfil-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+.registro-container {
+    position: relative;
+    max-width: 400px;           
+    margin: 4rem auto;          
+    padding: 2rem;              
+    background-color: #fff;     
+    border-radius: 8px;         
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;                
+    font-family: 'Poppins', sans-serif;
   }
-  
-  .perfil-container h2, .perfil-container h3 {
-    color: #e60023;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #e60023;
-    padding-bottom: 0.5rem;
-  }
-  
-  .perfil-container p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-  }
-  
-  .perfil-container strong {
-    color: #333;
-  }
-  
-  .perfil-container button {
-    margin-top: 1rem;
-    background-color: #e60023;
-    color: white;
+
+  .btn-back {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: transparent;
     border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
+    font-size: 1.2rem;
+    color: #555;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: color 0.2s ease;
   }
   
-  .perfil-container button:hover {
-    background-color: #c4001c;
+  .btn-back:hover {
+    color: #e60023;
   }
   
-  /* Estilos para el formulario de edición */
-  .perfil-container form {
-    margin-top: 1rem;
+
+  .registro-container h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #e60023;
+    text-align: center;
+  }
+  
+  /* Formulario */
+  .registro-container form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .perfil-container input {
-    padding: 0.5rem;
+
+  .registro-container label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.25rem;
+  }
+  
+
+  .registro-container input[type="email"],
+  .registro-container input[type="password"] {
+    padding: 0.75rem 1rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
   }
   
-  /* Productos en el carrito */
-  .perfil-container .producto-carrito {
-    background-color: #f7f7f7;
-    border-left: 4px solid #e60023;
-    padding: 0.8rem;
-    margin: 0.5rem 0;
+  .registro-container input:focus {
+    border-color: #e60023;
+  }
+  
+
+  .registro-container button[type="submit"] {
+    background-color: #e60023;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
     border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  /* Responsive */
-  @media (max-width: 600px) {
-    .perfil-container {
-      padding: 1rem;
-    }
+  .registro-container button[type="submit"]:hover {
+    background-color: #cc001f;
+  }
   
-    .perfil-container button {
-      width: 100%;
+
+  @media (max-width: 480px) {
+    .registro-container {
+      margin: 2rem 1rem;
+      padding: 1.5rem;
     }
   }
+  
+ 
+.registro-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .registro-link a {
+    color: #e60023;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 0.3rem;
+    transition: color 0.2s ease;
+  }
+  
+  .registro-link a:hover {
+    color: #cc001f;
+    text-decoration: underline;
+  }
+  
+
   
