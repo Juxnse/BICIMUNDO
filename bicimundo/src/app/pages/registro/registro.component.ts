@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegistroComponent {
 
   nombre: string = '';
-  cedula: string = '';
+  cedula?: string = '';
   email: string = '';
   fechaNacimiento: string = '';
   password: string = '';
@@ -52,7 +52,7 @@ export class RegistroComponent {
         position: 'top',
         icon: 'error',
         text: 'Este usuario ya está registrado.',
-        confirmButtonText: 'Cerrar',
+        confirmButtonText: 'Cerrar.',
         confirmButtonColor: '#e60023',
       });
       return;
@@ -64,7 +64,7 @@ export class RegistroComponent {
         email: this.email,
         fechaNacimiento: this.fechaNacimiento,
         password: this.password,
-        rol: this.rol      // siempre 'cliente'
+        rol: this.rol  
       };
 
     usuarios.push(nuevoUsuario);
