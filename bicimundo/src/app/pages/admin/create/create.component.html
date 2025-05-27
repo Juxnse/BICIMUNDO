@@ -1,18 +1,17 @@
 <form class="admin-create-form" (ngSubmit)="create()">
   <h2>Crear nueva bicicleta</h2>
 
-<label for="nombre">Nombre</label>
-<input id="nombre" type="text" [(ngModel)]="nombre" name="nombre" required />
+  <label for="nombre">Nombre</label>
+  <input id="nombre" type="text" [(ngModel)]="nombre" name="nombre" required />
 
-<label for="descripcion">Descripción</label>
-
+  <label for="descripcion">Descripción</label>
   <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion"></textarea>
 
-<label for="precio">Precio</label>
-<input id="precio" type="number" [(ngModel)]="precio" name="precio" required />
+  <label for="precio">Precio</label>
+  <input id="precio" type="number" [(ngModel)]="precio" name="precio" required />
 
-<label for="stock">Stock inicial</label>
-<input id="stock" type="number" [(ngModel)]="stock" name="stock" required />
+  <label for="stock">Stock inicial</label>
+  <input id="stock" type="number" [(ngModel)]="stock" name="stock" required />
 
   <label for="imagenUrl">URL de la imagen</label>
   <input
@@ -23,6 +22,11 @@
     placeholder="https://ejemplo.com/mi-foto.jpg"
     required
   />
+
+  <label for="destacada">
+    <input type="checkbox" [(ngModel)]="destacada" name="destacada" />
+    ¿Es destacada?
+  </label>
 
   <div class="buttons">
     <button type="submit" class="btn-submit">Crear</button>

@@ -1,4 +1,5 @@
-import { Injectable }      from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Bicicleta {
@@ -13,9 +14,12 @@ export interface Bicicleta {
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  private apiUrl = 'http://localhost:3000/api/productos';
   private storageKey = 'bicicletas';
   private biciSubject = new BehaviorSubject<Bicicleta[]>(this.load());
   bicicletas$ = this.biciSubject.asObservable();
+
+  constructor(private http: HttpClient) {}
 
   private load(): Bicicleta[] {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
@@ -26,31 +30,69 @@ export class ProductService {
     this.biciSubject.next(list);
   }
 
-  /** Obtiene todas las bicis */
   getAll(): Bicicleta[] {
     return this.biciSubject.value;
   }
 
-  /** Obtiene solo las destacadas */
   getDestacadas(): Bicicleta[] {
     return this.getAll().filter(b => b.destacada);
   }
 
-  /** Crear nueva bicicleta */
-  create(bici: Omit<Bicicleta,'id'>) {
-    const list = this.getAll();
-    const nextId = list.length ? Math.max(...list.map(b=>b.id))+1 : 1;
-    this.save([ ...list, { ...bici, id: nextId } ]);
+  // ✅ Obtener productos desde Supabase
+  getFromSupabase() {
+    this.http.get<Bicicleta[]>(this.apiUrl).subscribe({
+      next: (res) => {
+        const lista = Array.isArray(res) ? res : [];
+        this.save(lista); // actualiza localStorage
+        console.log('✅ Productos cargados desde Supabase');
+      },
+      error: (err) => {
+        console.error('❌ Error al obtener productos de Supabase', err);
+      }
+    });
   }
 
-  /** Actualizar bici existente */
+  // Crear nueva bicicleta
+  create(bici: Omit<Bicicleta, 'id'>) {
+    const list = this.getAll();
+    const nextId = list.length ? Math.max(...list.map(b => b.id)) + 1 : 1;
+    const nuevaBici = { ...bici, id: nextId };
+
+    this.save([...list, nuevaBici]);
+
+    const { nombre, descripcion, precio, imagen, stock } = bici;
+
+    this.http.post(this.apiUrl, {
+      nombre,
+      descripcion,
+      precio,
+      imagen,
+      stock
+    }).subscribe({
+      next: res => console.log('Producto guardado en Supabase', res),
+      error: err => console.error('Error al guardar en Supabase', err)
+    });
+  }
+
+  // Actualizar bici local (por ahora solo localStorage)
   update(updated: Bicicleta) {
     const list = this.getAll().map(b => b.id === updated.id ? updated : b);
     this.save(list);
+    // Aquí en el futuro se puede hacer un PUT/PATCH a Supabase
   }
 
-  /** Eliminar */
+  // Eliminar remotamente + localmente
   delete(id: number) {
-    this.save(this.getAll().filter(b => b.id !== id));
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe({
+      next: () => {
+        console.log(`Producto ${id} eliminado de Supabase`);
+
+        const updatedList = this.getAll().filter(b => b.id !== id);
+        this.save(updatedList);
+      },
+      error: err => {
+        console.error('Error al eliminar en Supabase', err);
+      }
+    });
   }
 }

@@ -1,4 +1,3 @@
-// src/app/pages/admin/dashboard/dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -9,11 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule                
-  ],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -23,6 +18,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private ps: ProductService) {}
 
   ngOnInit() {
+    this.ps.getFromSupabase(); // 🔄 Carga desde Supabase
     this.bicis = this.ps.getAll();
     this.ps.bicicletas$.subscribe(list => this.bicis = list);
   }
@@ -52,7 +48,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   del(id: number) {
-    // buscamos el nombre para el mensaje
     const bici = this.bicis.find(x => x.id === id);
     const nombre = bici ? bici.nombre : 'este producto';
 
