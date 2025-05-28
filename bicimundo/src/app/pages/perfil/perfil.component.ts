@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, User } from '../../services/auth.service';
+import { ClienteApiService } from '../../services/cliente-api.service';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [ CommonModule, FormsModule, RouterModule ],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-
-  usuario: any = null;
+  usuario: User | null = null;
   carrito: any[] = [];
   nombre: string = '';
   cedula: string = '';
@@ -26,10 +26,10 @@ export class PerfilComponent implements OnInit {
   contrasenaActual: string = '';
   editando: boolean = false;
 
-
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private clienteApi: ClienteApiService
   ) {}
 
   ngOnInit() {
@@ -40,13 +40,11 @@ export class PerfilComponent implements OnInit {
     }
 
     this.usuario = user;
-
-    this.nombre = this.usuario.nombre;
-    this.email = this.usuario.email;
-    this.cedula = this.usuario.cedula;
-    this.direccion = this.usuario.direccion || '';
-    this.telefono = this.usuario.telefono || '';
-
+    this.nombre = user.nombre;
+    this.email = user.email;
+    this.cedula = user.cedula || '';
+    this.direccion = user.direccion || '';
+    this.telefono = user.telefono || '';
     this.carrito = JSON.parse(localStorage.getItem(`carrito_${this.usuario.email}`) || '[]');
   }
 
@@ -54,84 +52,73 @@ export class PerfilComponent implements OnInit {
     this.editando = !this.editando;
   }
 
-    guardar() {
-    // 2) Validación: debe ingresar la actual
+  guardar() {
     if (!this.contrasenaActual) {
       Swal.fire({
-        position: 'top',
         icon: 'error',
-        text: 'Debes ingresar tu contraseña actual para poder actualizar los datos de tu perfil.',
-        showConfirmButton: true,
+        text: 'Debes ingresar tu contraseña actual.',
         confirmButtonColor: '#e60023',
       });
       return;
     }
 
-    // 3) Validación: contraseña actual correcta
-    if (this.contrasenaActual !== this.usuario.password) {
+    if (this.contrasenaActual !== this.usuario?.password) {
       Swal.fire({
-        position: 'top',
         icon: 'error',
         text: 'Contraseña actual incorrecta.',
-        showConfirmButton: true,
         confirmButtonColor: '#e60023',
       });
       return;
     }
 
-    // 4) Validación de nueva vs confirmación (solo si ingresó nueva)
     if (this.nuevaPassword && this.nuevaPassword !== this.confirmarPassword) {
       Swal.fire({
-        position: 'top',
         icon: 'error',
-        text: 'Las contraseñas no coinciden.',
-        showConfirmButton: true,
+        text: 'Las nuevas contraseñas no coinciden.',
         confirmButtonColor: '#e60023',
       });
       return;
     }
 
-    // 5) Guardar cambios
-    // Conservamos el email original para buscar el índice
-    const emailOriginal = this.usuario.email;
-
-    // Preparamos objeto mergeado
-    const actualizadoUsuario = {
-      ...this.usuario,
+    const actualizado = {
       nombre: this.nombre,
       email: this.email,
       cedula: this.cedula,
       direccion: this.direccion,
       telefono: this.telefono,
-      // Solo sobreescribimos password si ingresó nuevaPassword
-      ...(this.nuevaPassword && { password: this.nuevaPassword })
+      ...(this.nuevaPassword && { password: this.nuevaPassword }),
+      fechaNacimiento: this.usuario?.fechaNacimiento,
     };
 
-    // Actualizamos array en localStorage
-    const usuarios: any[] = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const idx = usuarios.findIndex(u => u.email === emailOriginal);
-    if (idx > -1) {
-      usuarios[idx] = actualizadoUsuario;
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    }
+    this.clienteApi.actualizarCliente(this.usuario!.id.toString(), actualizado).subscribe({
+      next: () => {
+        const actualizadoUsuario: User = {
+          ...this.usuario!,
+          ...actualizado,
+          password: this.nuevaPassword || this.usuario!.password
+        };
 
-    // Actualizamos AuthService y localStorage interno
-    this.auth.setUser(actualizadoUsuario);
+        this.auth.updateUserLocally(actualizadoUsuario);
 
-    Swal.fire({
-      position: 'top',
-      icon: 'success',
-      text: 'Perfil actualizado correctamente.',
-      showConfirmButton: false,
-      timer: 1000
+        Swal.fire({
+          icon: 'success',
+          text: 'Perfil actualizado correctamente.',
+          timer: 1000,
+          showConfirmButton: false
+        });
+
+        this.contrasenaActual = '';
+        this.nuevaPassword = '';
+        this.confirmarPassword = '';
+        this.editando = false;
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          text: err?.error?.message || 'Error al actualizar el perfil.',
+          confirmButtonColor: '#e60023',
+        });
+      }
     });
-
-
-    this.contrasenaActual = '';
-    this.nuevaPassword = '';
-    this.confirmarPassword = '';
-    this.editando = false;
   }
 }
-
-

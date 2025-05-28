@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
-import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-carrito',
@@ -12,29 +11,19 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-  carrito: any[] = [];  
+  carrito: any[] = [];
   total: number = 0;
-  usuarioActual: any = null;
 
-  constructor(private cartService: CartService,
-    private ps: ProductService,
-  ) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    const usuarioGuardado = localStorage.getItem('usuarioActual');
-    if (usuarioGuardado) {
-      this.usuarioActual = JSON.parse(usuarioGuardado);
-    }
-
     this.cartService.carrito$.subscribe(items => {
       this.carrito = items;
-      this.total = items.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+      this.total = items.reduce((acc, item) => acc + (item.subtotal || 0), 0);
     });
   }
 
-  eliminarDelCarrito(index: number) {
-    this.cartService.eliminarDelCarrito(index);
-
+  eliminarDelCarrito(itemId: number) {
+    this.cartService.eliminarDelCarrito(itemId);
   }
-
 }

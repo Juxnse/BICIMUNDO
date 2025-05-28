@@ -13,12 +13,11 @@
   <section class="destacados">
     <h3>Bicicletas destacadas</h3>
     <div class="productos-grid">
-      <!-- Si no hay ninguna, aviso -->
+
       <ng-container *ngIf="(bicicletasDestacadas$ | async)?.length === 0">
         <p>No hay bicicletas destacadas por el momento.</p>
       </ng-container>
 
-      <!-- Recorremos solo las destacadas -->
       <div 
         *ngFor="let bici of (bicicletasDestacadas$ | async)" 
         class="producto"

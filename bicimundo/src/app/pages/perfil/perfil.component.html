@@ -12,7 +12,7 @@
     <button (click)="toggleEditar()">Editar perfil</button>
 
     <form *ngIf="editando" (submit)="guardar(); $event.preventDefault()">
-      <!-- Contraseña actual -->
+
       <label for="contrasenaActual">Contraseña actual</label>
       <input
         id="contrasenaActual"

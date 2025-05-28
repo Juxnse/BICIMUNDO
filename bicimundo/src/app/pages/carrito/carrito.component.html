@@ -6,14 +6,20 @@
   </div>
 
   <div *ngIf="carrito.length > 0" class="carrito-items">
-    <div *ngFor="let producto of carrito; let i = index" class="carrito-item">
-      <img [src]="producto.imagen" [alt]="producto.nombre" class="producto-img" />
+    <div *ngFor="let producto of carrito" class="carrito-item">
 
-      <h4>{{ producto.nombre }}</h4>
+      <img
+        [src]="producto.productos?.imagen || 'assets/img/placeholder.png'"
+        [alt]="producto.productos?.nombre || 'Producto sin nombre'"
+        class="producto-img"
+      />
+
+      <h4>{{ producto.productos?.nombre }}</h4>
       <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
-      <p><strong>Precio unitario:</strong> ${{ producto.precio | number }}</p>
-      <p><strong>Subtotal:</strong> ${{ (producto.precio * producto.cantidad) | number }}</p>
-      <button class="btn-eliminar" (click)="eliminarDelCarrito(i)">
+      <p><strong>Precio unitario:</strong> ${{ producto.precio_unitario | number }}</p>
+      <p><strong>Subtotal:</strong> ${{ producto.subtotal | number }}</p>
+
+      <button class="btn-eliminar" (click)="eliminarDelCarrito(producto.id)">
         Eliminar
       </button>
     </div>

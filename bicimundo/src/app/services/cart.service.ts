@@ -1,108 +1,85 @@
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Bicicleta, ProductService } from './product.service';
 import Swal from 'sweetalert2';
+import { CarritoApiService } from './carrito-api.service';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private carrito = new BehaviorSubject<any[]>([]);
   carrito$ = this.carrito.asObservable();
+  private carritoId: number | null = null;
 
-  constructor(private auth: AuthService,
+  constructor(
+    private auth: AuthService,
     private productService: ProductService,
+    private carritoApi: CarritoApiService
   ) {
     this.auth.user$.subscribe(user => {
-      const carritoGuardado = user 
-        ? JSON.parse(localStorage.getItem(`carrito_${user.email}`) || '[]')
-        : [];
-      this.carrito.next(carritoGuardado);
+      if (user) {
+        this.carritoApi.getOrCreateCarrito(user.id).subscribe(carrito => {
+          this.carritoId = carrito?.id ?? null;
+          if (this.carritoId !== null) {
+            this.cargarItems(this.carritoId);
+          }
+        });
+      } else {
+        this.carrito.next([]);
+        this.carritoId = null;
+      }
     });
   }
 
-
-  private saveCart(cart: any[]) {
-    const user = this.auth.currentUser;
-    if (user && user.email) {
-      localStorage.setItem(`carrito_${user.email}`, JSON.stringify(cart));
-    } else {
-      localStorage.setItem('carrito_invitado', JSON.stringify(cart));
-    }
+  private cargarItems(carritoId: number) {
+    this.carritoApi.obtenerItems(carritoId).subscribe(items => {
+      this.carrito.next(items);
+    });
   }
 
-   agregarAlCarrito(producto: Bicicleta, cantidad: number = 1) {
-    if (!this.auth.currentUser) {
-      Swal.fire(
-        'Error',
-        'No se pueden agregar bicicletas al carrito si no estás logeado',
-        'error'
-      );
+  agregarAlCarrito(producto: Bicicleta, cantidad: number = 1) {
+    const user = this.auth.currentUser;
+    if (!user) {
+      Swal.fire('Error', 'Debes iniciar sesión para agregar productos', 'error');
       return;
     }
 
     if (producto.stock < cantidad) {
-        Swal.fire('Sin stock', 'No hay stock disponible para éste producto por el momento, lamentamos las molestias.', 'warning',
-        );
+      Swal.fire('Sin stock', 'No hay stock disponible', 'warning');
       return;
     }
 
-    const updatedBike: Bicicleta = {
+    if (this.carritoId === null) {
+      Swal.fire('Error', 'Carrito no disponible. Intenta nuevamente.', 'error');
+      return;
+    }
+
+    this.productService.update({
       ...producto,
       stock: producto.stock - cantidad
-    };
-    this.productService.update(updatedBike);
+    });
 
-    const cartClone = [...this.carrito.value];
-    const idx = cartClone.findIndex(item => item.id === producto.id);
-
-    if (idx > -1) {
-      cartClone[idx].cantidad += cantidad;
-    } else {
-      cartClone.push({ ...producto, cantidad });
-    }
-
-    this.carrito.next(cartClone);
-    this.saveCart(cartClone);
-
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      text: `Agregaste ${cantidad} x ${producto.nombre} al carrito.`,
-      showConfirmButton: false,
-      timer: 1000
+    this.carritoApi.agregarItem(this.carritoId, producto.id, cantidad).subscribe(() => {
+      this.cargarItems(this.carritoId!);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        text: `Agregaste ${cantidad} x ${producto.nombre}`,
+        showConfirmButton: false,
+        timer: 1000
+      });
     });
   }
-  
 
-eliminarDelCarrito(index: number) {
-  const cartClone = [...this.carrito.value];
+  eliminarDelCarrito(itemId: number) {
+    if (this.carritoId === null) return;
 
-  const [eliminado] = cartClone.splice(index, 1);
-
-
-  if (eliminado) {
-
-    const todasLasBicis = this.productService.getAll();
-
-    const biciEnStock = todasLasBicis.find(b => b.id === eliminado.id);
-    if (biciEnStock) {
-
-      const updatedBici: Bicicleta = {
-        ...biciEnStock,
-        stock: biciEnStock.stock + (eliminado.cantidad || 1)
-      };
-
-      this.productService.update(updatedBici);
-    }
+    this.carritoApi.eliminarItem(itemId).subscribe(() => {
+      this.cargarItems(this.carritoId!);
+    });
   }
 
-
-  this.carrito.next(cartClone);
-  this.saveCart(cartClone);
-}
-
   clear() {
-    this.saveCart([]);
+    this.carrito.next([]);
   }
 }

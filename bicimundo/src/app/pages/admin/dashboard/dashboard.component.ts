@@ -18,9 +18,10 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private ps: ProductService) {}
 
   ngOnInit() {
-    this.ps.getFromSupabase(); // 🔄 Carga desde Supabase
-    this.bicis = this.ps.getAll();
-    this.ps.bicicletas$.subscribe(list => this.bicis = list);
+    this.ps.getFromSupabase();
+    this.ps.bicicletas$.subscribe(list => {
+      this.bicis = list;
+    });
   }
 
   save(b: Bicicleta) {
@@ -35,6 +36,7 @@ export class AdminDashboardComponent implements OnInit {
       cancelButtonColor: '#6c757d'
     }).then(result => {
       if (result.isConfirmed) {
+        console.log('🛠 Enviando PATCH al backend:', b);
         this.ps.update(b);
         Swal.fire({
           title: 'Guardado',

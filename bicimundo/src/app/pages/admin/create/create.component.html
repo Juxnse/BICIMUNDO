@@ -13,13 +13,12 @@
   <label for="stock">Stock inicial</label>
   <input id="stock" type="number" [(ngModel)]="stock" name="stock" required />
 
-  <label for="imagenUrl">URL de la imagen</label>
+  <label for="imagenFile">Imagen del producto</label>
   <input
-    id="imagenUrl"
-    type="url"
-    [(ngModel)]="imagenUrl"
-    name="imagenUrl"
-    placeholder="https://ejemplo.com/mi-foto.jpg"
+    id="imagenFile"
+    type="file"
+    (change)="onFileSelected($event)"
+    accept="image/*"
     required
   />
 

@@ -2,12 +2,11 @@
 <table class="admin-table">
   <colgroup>
     <col style="width: 5%;" />    <!-- ID -->
-    <col style="width: 15%;" />
-    <col style="width: 40%;" />    <!-- Nombre -->
+    <col style="width: 15%;" />   <!-- Nombre -->
+    <col style="width: 40%;" />   <!-- Descripción -->
     <col style="width: 10%;" />   <!-- Precio -->
     <col style="width: 10%;" />   <!-- Stock -->
     <col style="width: 10%;" />   <!-- Destacada -->
-      <!-- Descripción (textarea) -->
     <col style="width: 10%;" />   <!-- Acciones -->
   </colgroup>
   <thead>
@@ -24,35 +23,36 @@
   <tbody>
     <tr *ngFor="let b of bicis">
       <td>{{ b.id }}</td>
-      <td><input type="text" [(ngModel)]="b.nombre" /></td>
+      <td><input type="text" [(ngModel)]="b.nombre" name="nombre-{{b.id}}" id="nombre-{{b.id}}" /></td>
       <td>
         <textarea
           class="desc-textarea"
           [(ngModel)]="b.descripcion"
+          name="descripcion-{{b.id}}"
+          id="descripcion-{{b.id}}"
           rows="3"
         ></textarea>
       </td>
-      <td><input type="number" [(ngModel)]="b.precio" /></td>
-      <td><input type="number" [(ngModel)]="b.stock" /></td>
+      <td><input type="number" [(ngModel)]="b.precio" name="precio-{{b.id}}" id="precio-{{b.id}}" /></td>
+      <td><input type="number" [(ngModel)]="b.stock" name="stock-{{b.id}}" id="stock-{{b.id}}" /></td>
       <td>
         <div class="destacada">
-          <input type="checkbox" [(ngModel)]="b.destacada" />
+          <input
+            type="checkbox"
+            [(ngModel)]="b.destacada"
+            name="destacada-{{b.id}}"
+            id="destacada-{{b.id}}"
+          />
         </div>
       </td>
-
       <td>
         <div class="action-buttons">
-          <button type="button" class="btn" (click)="save(b)">
-            Guardar
-          </button>
-          <button type="button" class="btn" (click)="del(b.id)">
-            Eliminar
-          </button>
+          <button type="button" class="btn" (click)="save(b)">Guardar</button>
+          <button type="button" class="btn" (click)="del(b.id)">Eliminar</button>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
-<a routerLink="/admin/create" class="btn-crear">
-  Crear nueva bicicleta
-</a>
+
+<a routerLink="/admin/create" class="btn-crear">Crear nueva bicicleta</a>

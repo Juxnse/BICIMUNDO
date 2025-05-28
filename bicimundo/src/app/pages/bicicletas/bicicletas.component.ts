@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../services/cart.service';
 import { ProductService, Bicicleta } from '../../services/product.service';
-
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-bicicletas',
@@ -14,26 +13,20 @@ import { ProductService, Bicicleta } from '../../services/product.service';
 })
 export class BicicletasComponent implements OnInit {
   bicicletas: Bicicleta[] = [];
+
   constructor(
-    private ps: ProductService,
-    private cart: CartService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
-  
-
-  usuarioActual: any = null;
-
-
-  ngOnInit() {
-    this.bicicletas = this.ps.getAll();
-    this.ps.bicicletas$.subscribe(list => this.bicicletas = list);
+  ngOnInit(): void {
+    this.productService.bicicletas$.subscribe(bicis => {
+      this.bicicletas = bicis;
+    });
+    this.productService.getFromSupabase(); // Asegura la carga inicial
   }
 
   agregarAlCarrito(bici: Bicicleta) {
-    if (!bici) return;
-
-    this.cart.agregarAlCarrito(bici);
-
+    this.cartService.agregarAlCarrito(bici, 1);
   }
 }
-
