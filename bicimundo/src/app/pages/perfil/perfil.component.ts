@@ -16,15 +16,18 @@ import { ClienteApiService } from '../../services/cliente-api.service';
 export class PerfilComponent implements OnInit {
   usuario: User | null = null;
   carrito: any[] = [];
-  nombre: string = '';
-  cedula: string = '';
-  email: string = '';
-  direccion: string = '';
-  telefono: string = '';
-  nuevaPassword: string = '';
-  confirmarPassword: string = '';
-  contrasenaActual: string = '';
-  editando: boolean = false;
+
+  nombre = '';
+  cedula = '';
+  email = '';
+  direccion = '';
+  telefono = '';
+
+  contrasenaActual = '';
+  nuevaPassword = '';
+  confirmarPassword = '';
+
+  editando = false;
 
   constructor(
     private auth: AuthService,
@@ -45,80 +48,111 @@ export class PerfilComponent implements OnInit {
     this.cedula = user.cedula || '';
     this.direccion = user.direccion || '';
     this.telefono = user.telefono || '';
-    this.carrito = JSON.parse(localStorage.getItem(`carrito_${this.usuario.email}`) || '[]');
+    this.carrito = JSON.parse(localStorage.getItem(`carrito_${user.email}`) || '[]');
   }
 
-  toggleEditar() {
+  toggleEditar(): void {
     this.editando = !this.editando;
   }
 
-  guardar() {
+  guardar(): void {
     if (!this.contrasenaActual) {
       Swal.fire({
         icon: 'error',
-        text: 'Debes ingresar tu contraseña actual.',
+        text: 'Debes ingresar tu contraseña actual para guardar cambios.',
         confirmButtonColor: '#e60023',
       });
       return;
     }
 
-    if (this.contrasenaActual !== this.usuario?.password) {
+    // No validar aquí en frontend, lo hará el backend
+    if (!this.contrasenaActual) {
       Swal.fire({
         icon: 'error',
-        text: 'Contraseña actual incorrecta.',
+        text: 'Debes ingresar tu contraseña actual para guardar cambios.',
         confirmButtonColor: '#e60023',
       });
       return;
     }
 
-    if (this.nuevaPassword && this.nuevaPassword !== this.confirmarPassword) {
-      Swal.fire({
-        icon: 'error',
-        text: 'Las nuevas contraseñas no coinciden.',
-        confirmButtonColor: '#e60023',
-      });
-      return;
+    // El backend validará la contraseña actual y la nueva
+
+    // Si se solicita cambio de contraseña, validaciones
+    if (this.nuevaPassword) {
+      if (this.nuevaPassword !== this.confirmarPassword) {
+        Swal.fire({
+          icon: 'error',
+          text: 'Las nuevas contraseñas no coinciden.',
+          confirmButtonColor: '#e60023',
+        });
+        return;
+      }
+      if (this.nuevaPassword === this.contrasenaActual) {
+        Swal.fire({
+          icon: 'error',
+          text: 'La contraseña nueva debe ser diferente a la actual.',
+          confirmButtonColor: '#e60023',
+        });
+        return;
+      }
     }
 
-    const actualizado = {
+    // Construyo payload
+    const payload: any = {
       nombre: this.nombre,
       email: this.email,
       cedula: this.cedula,
       direccion: this.direccion,
       telefono: this.telefono,
-      ...(this.nuevaPassword && { password: this.nuevaPassword }),
       fechaNacimiento: this.usuario?.fechaNacimiento,
     };
 
-    this.clienteApi.actualizarCliente(this.usuario!.id.toString(), actualizado).subscribe({
-      next: () => {
-        const actualizadoUsuario: User = {
-          ...this.usuario!,
-          ...actualizado,
-          password: this.nuevaPassword || this.usuario!.password
-        };
+    if (this.nuevaPassword) {
+      payload.currentPassword = this.contrasenaActual;
+      payload.newPassword = this.nuevaPassword;
+    } else {
+      // si no cambia contraseña, mando currentPassword para validación
+      payload.currentPassword = this.contrasenaActual;
+    }
 
-        this.auth.updateUserLocally(actualizadoUsuario);
+    this.clienteApi
+      .actualizarCliente(this.usuario!.id.toString(), payload)
+      .subscribe({
+        next: () => {
+          // Actualizar user localmente
+          const actualizadoUsuario: User = {
+            ...this.usuario!,
+            nombre: this.nombre,
+            email: this.email,
+            cedula: this.cedula,
+            direccion: this.direccion,
+            telefono: this.telefono,
+            password: this.nuevaPassword || this.usuario!.password,
+            fechaNacimiento: this.usuario!.fechaNacimiento,
+          };
+          this.auth.updateUserLocally(actualizadoUsuario);
 
-        Swal.fire({
-          icon: 'success',
-          text: 'Perfil actualizado correctamente.',
-          timer: 1000,
-          showConfirmButton: false
-        });
+          Swal.fire({
+            icon: 'success',
+            text: 'Perfil actualizado correctamente.',
+            timer: 1000,
+            showConfirmButton: false,
+          });
 
-        this.contrasenaActual = '';
-        this.nuevaPassword = '';
-        this.confirmarPassword = '';
-        this.editando = false;
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          text: err?.error?.message || 'Error al actualizar el perfil.',
-          confirmButtonColor: '#e60023',
-        });
-      }
-    });
+          // Limpio campos
+          this.contrasenaActual = '';
+          this.nuevaPassword = '';
+          this.confirmarPassword = '';
+          this.editando = false;
+        },
+        error: err => {
+          const msg = err?.error?.message || 'Error al actualizar el perfil.';
+          Swal.fire({
+            icon: 'error',
+            text: msg,
+            confirmButtonColor: '#e60023',
+          });
+        }
+      });
   }
 }
