@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { ProductService, Bicicleta } from '../../../services/product.service';
 import { createClient } from '@supabase/supabase-js';
+import Swal from 'sweetalert2';
 
 const supabase = createClient(
   'https://zypbnamuapdrrlggitgv.supabase.co',
@@ -37,9 +38,15 @@ export class AdminCreateComponent {
     }
   }
 
-  async create() {
+  async create(): Promise<void> {
     if (!this.imagenFile) {
-      alert('Debes seleccionar una imagen.');
+      await Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Error',
+        text: 'Debes seleccionar una imagen.',
+        confirmButtonColor: '#d33'
+      });
       return;
     }
 
@@ -51,7 +58,13 @@ export class AdminCreateComponent {
 
     if (error) {
       console.error('Error al subir imagen:', error);
-      alert('Error al subir imagen');
+      await Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Error al subir imagen',
+        text: error.message || 'No se pudo subir la imagen.',
+        confirmButtonColor: '#d33'
+      });
       return;
     }
 
@@ -67,9 +80,19 @@ export class AdminCreateComponent {
     };
 
     this.ps.create(nuevaBici);
-    alert('Producto creado correctamente.');
+
+    await Swal.fire({
+      position: 'top',
+      icon: 'success',
+      text: `¡Producto creado con éxito!`,
+      showConfirmButton: false,
+      timer: 1000
+    });
+
     this.router.navigate(['/admin']);
+    return;
   }
+
 
   cancel() {
     this.router.navigate(['/admin']);
