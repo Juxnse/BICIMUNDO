@@ -29,6 +29,9 @@
 
     <nav class="menu-principal" *ngIf="usuarioActual?.rol === 'admin'">
       <ul class="menu-izquierda">
+        <li><a routerLink="/home">Inicio</a></li>
+        <li><a routerLink="/bicicletas">Tienda</a></li>
+        <li><a routerLink="/admin" class="btn-admin">Panel de Administración</a></li>
         <li>
           <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar sesión</button>
         </li>
@@ -44,5 +47,4 @@
     <p>&copy; 2025 BiciMundo. Todos los derechos reservados 🚲</p>
   </footer>
 </div>
-  
   
