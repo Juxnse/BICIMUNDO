@@ -1,9 +1,11 @@
+// src/app/services/cliente-api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ClienteApiService {
   private apiUrl = 'http://localhost:3000/clientes';
+  private authApiUrl = 'http://localhost:3000/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -11,14 +13,14 @@ export class ClienteApiService {
     return this.http.post(this.apiUrl, cliente);
   }
 
-  loginCliente(credentials: { email: string, password: string }) {
-  return this.http.post('http://localhost:3000/clientes/login', credentials);
-}
+  loginCliente(credentials: { email: string; password: string }) {
+    return this.http.post<{ access_token: string; user: any }>(
+      `${this.authApiUrl}/login`,
+      credentials
+    );
+  }
 
-actualizarCliente(id: string, clienteActualizado: any) {
-  return this.http.patch(`http://localhost:3000/clientes/${id}`, clienteActualizado);
-}
-
-
-
+  actualizarCliente(id: string, clienteActualizado: any) {
+    return this.http.patch(`${this.apiUrl}/${id}`, clienteActualizado);
+  }
 }
