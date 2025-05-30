@@ -1,7 +1,9 @@
-import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CarritoItemsService } from './carrito_items.service';
 
 @Controller('carrito-items')
+@UseGuards(JwtAuthGuard)
 export class CarritoItemsController {
   constructor(private readonly service: CarritoItemsService) {}
 
