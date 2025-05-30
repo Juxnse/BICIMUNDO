@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
-import { ClienteApiService } from '../../services/cliente-api.service'; // nuevo servicio
+import { ClienteApiService } from '../../services/cliente-api.service';
 
 @Component({
   selector: 'app-registro',
@@ -27,7 +27,7 @@ export class RegistroComponent {
     private location: Location,
     private auth: AuthService,
     private router: Router,
-    private clienteApi: ClienteApiService // nuevo
+    private clienteApi: ClienteApiService
   ) {}
 
   goBack(): void {
@@ -37,8 +37,8 @@ export class RegistroComponent {
   registrarUsuario() {
     if (this.password !== this.password2) {
       Swal.fire({
-        position: 'top',
         icon: 'error',
+        title: 'Error al registrar',
         text: 'Las contraseñas no coinciden.',
         confirmButtonText: 'Volver a intentar',
         confirmButtonColor: '#e60023',
@@ -61,12 +61,10 @@ export class RegistroComponent {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          text: `Usuario registrado correctamente ¡Bienvenido ${res.nombre}!`,
+          text: `¡Usuario registrado con éxito!`,
           showConfirmButton: false,
           timer: 1000
-        }).then(() => {
-          this.router.navigate(['/home']);
-        });
+      });
       },
       error: (err) => {
         Swal.fire({
