@@ -17,8 +17,23 @@ export interface User {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(
-    JSON.parse(localStorage.getItem('usuarioActual') || 'null')
+    this.getStoredUser()
   );
+
+
+  private getStoredUser(): User | null {
+    const raw = localStorage.getItem('usuarioActual');
+    if (!raw) return null;
+
+    try {
+      return JSON.parse(raw);
+    } catch (err) {
+      console.error('❌ JSON inválido en localStorage:', err);
+      localStorage.removeItem('usuarioActual');
+      return null;
+    }
+  }
+
   user$: Observable<User | null> = this.userSubject.asObservable();
 
   constructor(private router: Router) {}
@@ -28,14 +43,7 @@ setUser(user: User) {
   this.userSubject.next(user);
   console.log('🌐 setUser llamado en:', this.router.url);
 
-
-  const rutaActual = this.router.url;
-
-  if (user.rol === 'admin' && !rutaActual.startsWith('/admin')) {
-    this.router.navigateByUrl('/admin', { replaceUrl: true });
-  } else if (user.rol !== 'admin' && rutaActual !== '/home') {
-    this.router.navigateByUrl('/home', { replaceUrl: true });
-  }
+  this.router.navigateByUrl('/login', { replaceUrl: true });
 }
 
 updateUserLocally(user: User) {
@@ -52,5 +60,9 @@ updateUserLocally(user: User) {
 
   get currentUser(): User | null {
     return this.userSubject.value;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
   }
 }
