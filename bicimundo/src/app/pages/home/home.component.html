@@ -11,35 +11,36 @@
   </section>
 
   <section class="destacados">
-    <h3>Bicicletas destacadas</h3>
-    <div class="productos-grid">
 
-      <ng-container *ngIf="(bicicletasDestacadas$ | async)?.length === 0">
-        <p>No hay bicicletas destacadas por el momento.</p>
-      </ng-container>
+      <h2>Bicicletas destacadas</h2>
 
-      <div 
-        *ngFor="let bici of (bicicletasDestacadas$ | async)" 
-        class="producto"
-      >
-        <a [routerLink]="['/detalles', bici.id]" class="producto-link">
-          <img 
-            [src]="bici.imagen" 
-            [alt]="bici.nombre" 
-            class="producto-img" 
-          />
-          <h4>{{ bici.nombre }}</h4>
-          <p>${{ bici.precio | number }}</p>
-        </a>
-        <button 
-          class="btn-agregar" 
-          (click)="agregarAlCarrito(bici)"
-          title="Para comprar, ve a la tienda"
+      <div class="productos-grid">
+        <ng-container *ngIf="bicicletasDestacadas.length === 0">
+          <p>No hay bicicletas destacadas por el momento.</p>
+        </ng-container>
+
+        <div
+          *ngFor="let bici of bicicletasDestacadas"
+          class="producto"
         >
-          Agregar al carrito
-        </button>
+          <a [routerLink]="['/detalles', bici.id]" class="producto-link">
+            <img
+              [src]="bici.imagen"
+              [alt]="bici.nombre"
+              class="producto-img"
+            />
+            <h4>{{ bici.nombre }}</h4>
+            <p>${{ bici.precio | number }}</p>
+          </a>
+          <button
+            class="btn-agregar"
+            (click)="agregarAlCarrito(bici)"
+            title="Para comprar, ve a la tienda"
+          >
+            Agregar al carrito
+          </button>
+        </div>
       </div>
-    </div>
   </section>
 </main>
 
