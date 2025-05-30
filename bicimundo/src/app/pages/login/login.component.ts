@@ -24,20 +24,25 @@ export class LoginComponent {
     private clienteApi: ClienteApiService
   ) {}
 
-  login() {
-    this.clienteApi.loginCliente({ email: this.email, password: this.password }).subscribe({
-      next: (usuario: any) => {
-        this.auth.setUser(usuario);
+login() {
+  this.clienteApi
+    .loginCliente({ email: this.email, password: this.password })
+    .subscribe({
+      next: (res: any) => {
+        this.auth.setUser(res.user);
+
+        localStorage.setItem('access_token', res.access_token);
+
         Swal.fire({
           position: 'top',
           icon: 'success',
-          text: `Bienvenido, ${usuario.nombre} 👋`,
+          text: `Bienvenido, ${res.user.nombre} 👋`,
           showConfirmButton: false,
           timer: 1000
         });
-
+        this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: err => {
         Swal.fire({
           position: 'top',
           icon: 'error',
