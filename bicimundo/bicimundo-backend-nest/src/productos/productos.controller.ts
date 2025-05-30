@@ -22,7 +22,7 @@ export class ProductosController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() body: any) {
-    console.log(`🛠 PATCH recibido para ID ${id}`, body); // 👈 para forzar recompilación
+    console.log(`🛠 PATCH recibido para ID ${id}`, body); 
     return await this.productosService.update(id, body);
   }
 }
