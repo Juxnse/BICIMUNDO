@@ -6,10 +6,7 @@ export class SupabaseService {
   private client: SupabaseClient;
 
   constructor() {
-    this.client = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_KEY!
-    );
+    this.client = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!);
   }
 
   getClient(): SupabaseClient {
