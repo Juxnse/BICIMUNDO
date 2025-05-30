@@ -16,17 +16,19 @@ import { CartService } from '../../services/cart.service';
 export class HomeComponent implements OnInit {
   usuarioActual: any = null;
 
-  bicicletasDestacadas$: Observable<Bicicleta[]>;
+  bicicletasDestacadas: Bicicleta[] = [];
 
-  constructor(private ps: ProductService,
+  constructor(private productService: ProductService,
     private cart: CartService
-  ) {
-    this.bicicletasDestacadas$ = this.ps.bicicletas$.pipe(
-      map(list => list.filter(b => b.destacada))
-    );
-  }
+  ) { }
 
   ngOnInit() {
+    this.productService.bicicletas$.subscribe(bicis => {
+      this.bicicletasDestacadas = this.productService.getDestacadas();
+    });
+    this.productService.getFromSupabase();
+
+
     const usuarioGuardado = localStorage.getItem('usuarioActual');
     if (usuarioGuardado) {
       this.usuarioActual = JSON.parse(usuarioGuardado);
