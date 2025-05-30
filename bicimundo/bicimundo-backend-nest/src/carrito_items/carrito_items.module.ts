@@ -4,8 +4,8 @@ import { CarritoItemsController } from './carrito_items.controller';
 import { SupabaseModule } from '../supabase/supabase.module';
 
 @Module({
-   imports: [SupabaseModule],
+  imports: [SupabaseModule],
   providers: [CarritoItemsService],
-  controllers: [CarritoItemsController]
+  controllers: [CarritoItemsController],
 })
 export class CarritoItemsModule {}
